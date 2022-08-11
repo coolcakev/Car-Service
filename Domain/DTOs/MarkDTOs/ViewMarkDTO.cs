@@ -9,7 +9,7 @@ namespace Domain.DTOs.MarkDTOs
     public class ViewMarkDTO
     {
         public string Name { get; set; }
-        public List<string> ModelNames { get; set; }
+        public List<SelectDTO> Models { get; set; }
 
     }
 }

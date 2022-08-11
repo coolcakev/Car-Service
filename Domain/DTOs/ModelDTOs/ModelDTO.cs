@@ -10,6 +10,7 @@ namespace Domain.DTOs.ModelDTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int MarkId { get; set; }
         public string MarkName { get; set; }
     }
 }

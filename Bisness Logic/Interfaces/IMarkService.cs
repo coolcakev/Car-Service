@@ -15,5 +15,6 @@ namespace Bisness_Logic.Interfaces
         Task<bool> Update(UpdateMarkDTO markDTO);
         Task<bool> Delete(int id);
         Task<ViewMarkDTO> GetMark(int id);
+        Task<IEnumerable<SelectDTO>> GetMarksForSelect();
     }
 }

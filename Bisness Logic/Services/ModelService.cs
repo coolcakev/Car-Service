@@ -48,7 +48,7 @@ namespace Bisness_Logic.Services
 
         public async Task<ViewModelDTO> GetModel(int id)
         {
-            var model = await _modelRepository.GetByIdWithInclude(id, x => x.Include(x => x.Mark));
+            var model = await _modelRepository.GetByIdWithInclude(id, x => x.Include(y => y.Mark));
             var modelDTO = _mapper.Map<ViewModelDTO>(model);
             return modelDTO;
         }
@@ -57,7 +57,7 @@ namespace Bisness_Logic.Services
         {
             filteringModel.SearchTerm ??= "";
             var models = await _modelRepository.GetFilteredWithTotalSum(filteringModel,
-                x => x.Name.Contains(filteringModel.SearchTerm));
+                x => x.Name.Contains(filteringModel.SearchTerm)&&x.MarkId== filteringModel.MarkId, x=>x.Include(y=>y.Mark));
 
             var modelDTOs = _mapper.Map<IEnumerable<ModelDTO>>(models.entities);
 

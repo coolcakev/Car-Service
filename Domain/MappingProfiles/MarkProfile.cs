@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.DTOs;
 using Domain.DTOs.MarkDTOs;
 using Domain.Entity;
 using System;
@@ -14,9 +15,10 @@ namespace Domain.MappingProfiles
         public MarkProfile()
         {
             CreateMap<Mark, MarkDTO>();
+            CreateMap<Mark, SelectDTO>();
             CreateMap<CreateMarkDTO, Mark>();
             CreateMap<Mark, ViewMarkDTO>()
-                .ForMember(x=>x.ModelNames,res=>res.MapFrom(x=>x.Models.Select(x=>x.Name)));
+                .ForMember(x=>x.Models,res=>res.MapFrom(x=>x.Models));
         }
     }
 }

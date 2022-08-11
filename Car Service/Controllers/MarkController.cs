@@ -33,6 +33,12 @@ namespace Car_Service.Controllers
             var marks = await _markService.GetMarks(filteringModel);
             return Ok(marks);
         }
+        [HttpGet("forSelect")]
+        public async Task<IActionResult> GetMarksForSelect()
+        {
+            var marks = await _markService.GetMarksForSelect();
+            return Ok(marks);
+        }
         [HttpPost("")]
         public async Task<IActionResult> CreateMark([FromBody] CreateMarkDTO markDTO)
         {
