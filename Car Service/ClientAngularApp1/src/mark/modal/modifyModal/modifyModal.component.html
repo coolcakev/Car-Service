@@ -1,0 +1,25 @@
+<ng-container *ngrxLet="mark$ | async as mark">
+  <form [formGroup]="form" (submit)="submit(mark===null ?createMark:updateMark)">
+    <div class="modal-header">
+      <h4 class="modal-title">{{mark===null?"Add":"Edit"}} Mark</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" [ngClass]="{
+             'is-invalid':name.errors?.required&&(name.touched||isSubmited)
+           }" class="form-control is-invalid" formControlName="name" />
+          <div class="invalid-feedback">
+            Please write mark name.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-primary">{{mark===null?"Add":"Edit"}}</button>
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  </form>
+</ng-container>

@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="marksCount$ | async" [page]="page$ | async" [pageSize]="pageSize$ | async" (pageChange)="handleChangePage($event)">
+  </ngb-pagination>
+
+  <select class="form-select" style="width: auto" [value]="pageSize$ | async" (change)="handlePageSizeChnge($event)">
+    <option value="2">2 items per page</option>
+    <option value="4">4 items per page</option>
+    <option value="5">5 items per page</option>
+    <option value="6">6 items per page</option>
+  </select>
+</div>

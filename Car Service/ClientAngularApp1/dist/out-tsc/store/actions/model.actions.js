@@ -1,0 +1,20 @@
+import { createAction, props } from "@ngrx/store";
+export const resetModelFilter = createAction('[Model] Reset Model Filter');
+export const setCurrentModelDTO = createAction('[Model] Set Current Edit Model DTO', props());
+export const setModelFilteringModel = createAction('[Model] Set Model Filtering Model', props());
+export const getModels = createAction('[Model] Get Models');
+export const getModelsSuccess = createAction('[Model] Get Models Success', props());
+export const getModelsFailure = createAction('[Model] Get Models Failure', props());
+export const getModel = createAction('[Model] Get Model', props());
+export const getModelSuccess = createAction('[Model] Get Model Success', props());
+export const getModelFailure = createAction('[Model] Get Model Failure', props());
+export const createModel = createAction('[Model] Create Model', props());
+export const createModelSuccess = createAction('[Model] Create Model Success');
+export const createModelFailure = createAction('[Model] Create Model Failure', props());
+export const updateModel = createAction('[Model] Update Model', props());
+export const updateModelSuccess = createAction('[Model] Update Model Success');
+export const updateModelFailure = createAction('[Model] Update Model Failure', props());
+export const deleteModel = createAction('[Model] Delete Model', props());
+export const deleteModelSuccess = createAction('[Model] Delete Model Success');
+export const deleteModelFailure = createAction('[Model] Delete Model Failure', props());
+//# sourceMappingURL=model.actions.js.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"delay.js","sourceRoot":"","sources":["../../../src/utility/delay.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,MAAM,KAAK,GAAG,CAAC,EAAU,EAAE,KAAY,EAAE,EAAE;IAC9C,OAAO,IAAI,OAAO,CAAC,OAAO,CAAC,EAAE;QACzB,KAAK,CAAC,OAAO,GAAG,UAAU,CAAC,OAAO,EAAE,EAAE,CAAC,CAAA;IAC3C,CAAC,CAAC,CAAA;AACN,CAAC,CAAA"}

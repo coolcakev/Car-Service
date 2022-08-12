@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+      <th scope="col" sortable="mark.Name" (sort)="onSort($event)">Mark name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let model of models$|async">
+      <td>{{ model.name }}</td>
+      <td>{{ model.markName }}</td>
+      <td>
+        <button type="button" class="btn btn-primary editButton" routerLink="./{{model.id}}">View</button>
+        <button type="button" class="btn btn-danger editButton" (click)="editHandle(model)">Edit</button>
+        <button type="button" class="btn btn-warning" (click)="deleteHandle(model)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
