@@ -1,5 +1,7 @@
 ﻿using Bisness_Logic.Interfaces;
 using Bisness_Logic.Services;
+using Bisness_Logic.Strategies.CarTreeStrategy;
+using Bisness_Logic.Strategies.CarTreeStrategy.CarTreeStrategyItems;
 using Data_Access;
 using Data_Access.Interfaces;
 using Data_Access.Repositories;
@@ -21,11 +23,23 @@ namespace Car_Service.Configuration
             ServiceConfig(services);
             InfrastructureConfig(services);
             DataAccessConfig(services, Configuration);
+            StrategiesConfig(services);
+        }
+
+        private static void StrategiesConfig(IServiceCollection services)
+        {
+            services.AddScoped<ICarTreeStrategy, CarTreeStrategy>();
+            services.AddScoped<ICarTreeStrategyItem, CarTreeStrategyMark>();
+            services.AddScoped<ICarTreeStrategyItem, CarTreeStrategyModel>();
         }
 
         private static void AutoMapperConfig(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(MarkProfile),typeof(ModelProfile));
+            services.AddAutoMapper(
+                typeof(MarkProfile),
+                typeof(ModelProfile),
+                typeof(PriceProfile),
+                typeof(CarProfile));
         }
 
         private static void RepositoryConfig(IServiceCollection services)
@@ -44,6 +58,7 @@ namespace Car_Service.Configuration
             services.AddScoped<IModelService, ModelService>();
             services.AddScoped<IMarkService, MarkService>();
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<ITreeService, TreeService>();
         }
 
         private static void InfrastructureConfig(IServiceCollection services)

@@ -31,6 +31,12 @@ namespace Data_Access.Repositories
         {
             return table.ToListAsync();
         }
+        public Task<List<T>> GetAllWithInclude(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+        {
+            IQueryable<T> query = table;
+            query = include(query);
+            return query.ToListAsync();
+        }
         public Task<T> GetById(object id)
         {
             return table.FindAsync(id).AsTask();
@@ -118,10 +124,34 @@ namespace Data_Access.Repositories
             {
                 query = query.OrderBy($"{filteringModel.Name} {filteringModel.SortOrder}");
             }
+
             var count = await query.CountAsync();
 
             if (filteringModel.Count != 0)
             {             
+                query = query.Skip(--filteringModel.Page * filteringModel.Count).Take(filteringModel.Count);
+            }
+
+            return (await query.ToListAsync(), count);
+        }
+        public async Task<(List<T> entities, int total)> GetFilteredWithTotalSumWithQurable(SortingModel filteringModel, IQueryable<T> query,
+           Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+        {          
+
+            if (include != null)
+            {
+                query = include(query);
+            }            
+
+            if (filteringModel.Name != null)
+            {
+                query = query.OrderBy($"{filteringModel.Name} {filteringModel.SortOrder}");
+            }
+
+            var count = await query.CountAsync();
+
+            if (filteringModel.Count != 0)
+            {
                 query = query.Skip(--filteringModel.Page * filteringModel.Count).Take(filteringModel.Count);
             }
 

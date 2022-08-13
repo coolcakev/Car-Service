@@ -84,8 +84,7 @@ namespace Bisness_Logic.Services
             {
                 return false;
             }
-
-            mark.Name = markDTO.Name;
+            
             _markRepository.Update(mark);
             await _unitOfWork.Save();
             return true;

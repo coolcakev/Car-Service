@@ -7,6 +7,7 @@ export class BaseService {
     private api=`${this.host}/api`
     protected markApi=`${this.api}/marks`
     protected modelApi=`${this.api}/models`
+    protected treeApi=`${this.api}/tree`
     constructor(protected httpClient: HttpClient) { }
     
 }

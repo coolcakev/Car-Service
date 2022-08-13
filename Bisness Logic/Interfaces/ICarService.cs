@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.DTOs;
+using Domain.DTOs.CarDTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,10 @@ namespace Bisness_Logic.Interfaces
 {
     public interface ICarService
     {
+        Task<ViewCarDTO> GetCar(int id);
+        Task<DTOWithTotalSum<CarDTO>> GetCars(CarFilteringModel filteringCar);
+        Task<int> Create(CreateCarDTO carDTO);
+        Task<bool> Update(UpdateCarDTO carDTO);
+        Task<bool> Delete(int id);
     }
 }

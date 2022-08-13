@@ -7,6 +7,7 @@ let BaseService = class BaseService {
         this.api = `${this.host}/api`;
         this.markApi = `${this.api}/marks`;
         this.modelApi = `${this.api}/models`;
+        this.treeApi = `${this.api}/tree`;
     }
 };
 BaseService = __decorate([

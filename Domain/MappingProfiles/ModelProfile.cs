@@ -17,6 +17,7 @@ namespace Domain.MappingProfiles
             CreateMap<Model, SelectDTO>();
             CreateMap<Model, ModelDTO>();
             CreateMap<CreateModelDTO, Model>();
+            CreateMap<UpdateModelDTO, Model>();
             CreateMap<Model, ViewModelDTO>()
                 .ForMember(x => x.Mark, res => res.MapFrom(x => x.Mark));
 

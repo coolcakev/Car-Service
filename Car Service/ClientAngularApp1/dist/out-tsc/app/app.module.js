@@ -11,12 +11,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { reducers } from 'src/store/index';
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     NgModule({
         declarations: [
-            AppComponent
+            AppComponent,
         ],
         imports: [
             BrowserModule,
@@ -25,9 +27,10 @@ AppModule = __decorate([
             HttpClientModule,
             MarkModule,
             CarModule,
-            StoreModule.forRoot({}),
+            StoreModule.forRoot(reducers, {}),
             StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-            EffectsModule.forRoot([])
+            EffectsModule.forRoot([]),
+            BrowserAnimationsModule,
         ],
         exports: [],
         providers: [],

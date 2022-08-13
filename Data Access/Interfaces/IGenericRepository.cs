@@ -17,6 +17,7 @@ namespace Data_Access.Interfaces
             Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
 
         Task<List<T>> GetAll();
+        Task<List<T>> GetAllWithInclude(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
         Task<T> GetById(object id);
         Task<bool> DeleteById(object id);
         Task<dynamic> GetByIdWithInclude(object id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include);

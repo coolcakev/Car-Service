@@ -56,8 +56,7 @@ namespace Bisness_Logic.Services
         public async Task<DTOWithTotalSum<ModelDTO>> GetModels(ModelFilteringModel filteringModel)
         {
             filteringModel.SearchTerm ??= "";
-            var models = await _modelRepository.GetFilteredWithTotalSum(filteringModel,
-                x => x.Name.Contains(filteringModel.SearchTerm)&&x.MarkId== filteringModel.MarkId, x=>x.Include(y=>y.Mark));
+            var models = await _modelRepository.GetModels(filteringModel);
 
             var modelDTOs = _mapper.Map<IEnumerable<ModelDTO>>(models.entities);
 
