@@ -1,5 +1,6 @@
 using Car_Service.Configuration;
 using Car_Service.Extensions;
+using Data_Access;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,9 +34,9 @@ namespace Car_Service
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context)
         {
-
+            context.CreateDataBase();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -43,6 +43,9 @@ ModelModule = __decorate([
             DeleteModalComponent,
             PaginationComponent,
         ],
+        exports: [
+            MarkSelectorComponent
+        ],
         bootstrap: [ModelComponent]
     })
 ], ModelModule);

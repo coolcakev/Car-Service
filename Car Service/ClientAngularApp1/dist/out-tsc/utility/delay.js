@@ -1,6 +1,6 @@
-export const delay = (ms, delay) => {
+export const delay = (ms, nameDelay, delay) => {
     return new Promise(resolve => {
-        delay.delayId = setTimeout(resolve, ms);
+        delay[nameDelay] = setTimeout(resolve, ms);
     });
 };
 //# sourceMappingURL=delay.js.map

@@ -1,5 +1,5 @@
 <select [ngClass]="{'is-invalid':hasError}" class="form-select w-100" aria-label="Default select example" (change)="handleMarkIdChange($event)">
-  <option selected>Open this select menu</option>
-  <option *ngFor="let mark of marksForSelect$ | async" [selected]="mark.id==markId" value="{{mark.id}}">
-    {{mark.name}}</option>
+  <option selected value="">{{allValueName}}</option>
+  <option *ngFor="let element of elementsSelect$ | async" [selected]="element.id==markId" value="{{element.id}}">
+    {{element.name}}</option>
 </select>

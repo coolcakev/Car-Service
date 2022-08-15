@@ -30,7 +30,7 @@ export class FilterComponent implements OnInit {
       return;
     }
     clearTimeout(this.delayId);
-    delay(500,this).then(() => this.store.dispatch(setMarkFilteringModel({ markFiltering: { searchTerm: target.value } })))    
+    delay<FilterComponent>(500,"delayId",this).then(() => this.store.dispatch(setMarkFilteringModel({ markFiltering: { searchTerm: target.value } })))    
   }
 
 

@@ -68,6 +68,15 @@ namespace Bisness_Logic.Services
             return dToWithTotalSum;
         }
 
+        public async Task<IEnumerable<SelectDTO>> GetModelsForSelect(int markId)
+        {
+            var models = await _modelRepository.Get(x=>x.MarkId== markId);
+
+            var modelDTOs = _mapper.Map<IEnumerable<SelectDTO>>(models);
+
+            return modelDTOs;
+        }
+
         public async Task<bool> Update(UpdateModelDTO modelDTO)
         {
             var model = await _modelRepository.GetById(modelDTO.Id);

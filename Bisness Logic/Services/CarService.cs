@@ -30,6 +30,11 @@ namespace Bisness_Logic.Services
         public async Task<int> Create(CreateCarDTO carDTO)
         {
             var car = _mapper.Map<Car>(carDTO);
+            car.Price.Add(new Price()
+            {
+                Value = carDTO.Price,
+                CreationDate = DateTime.Now
+            });
             await _carRepository.Insert(car);
             await _unitOfWork.Save();
             return car.Id;
@@ -59,7 +64,6 @@ namespace Bisness_Logic.Services
 
         public async Task<DTOWithTotalSum<CarDTO>> GetCars(CarFilteringModel filteringCar)
         {
-            filteringCar.SearchTerm ??= "";
             var cars = await _carRepository.GetCars(filteringCar);
 
             var carDTOs = _mapper.Map<IEnumerable<CarDTO>>(cars.entities);
@@ -72,9 +76,43 @@ namespace Bisness_Logic.Services
             return dToWithTotalSum;
         }
 
+        public async Task<IEnumerable<SelectDTO>> GetColors()
+        {
+            var cars = await _carRepository.GetAll();
+
+            var colors = new List<SelectDTO>();
+            foreach (var car in cars)
+            {
+                var color = new SelectDTO()
+                {
+                    Id = car.Color,
+                    Name = car.Color
+                };
+                colors.Add(color);
+            }
+            return colors;
+        }
+
+        public async Task<IEnumerable<SelectDTO>> GetEgineCapacities()
+        {
+            var cars = await _carRepository.GetAll();
+
+            var colors = new List<SelectDTO>();
+            foreach (var car in cars)
+            {
+                var color = new SelectDTO()
+                {
+                    Id = car.Engine,
+                    Name = car.Engine
+                };
+                colors.Add(color);
+            }
+            return colors;
+        }
+
         public async Task<bool> Update(UpdateCarDTO carDTO)
         {
-            var car = await _carRepository.GetById(carDTO.Id);
+            var car = (await _carRepository.GetByIdWithInclude(carDTO.Id, x => x.Include(x => x.Price))) as Car;
             if (car == null)
             {
                 return false;
@@ -84,7 +122,13 @@ namespace Bisness_Logic.Services
             car.MarkId = carDTO.MarkId;
             car.ModelId = carDTO.ModelId;
             car.Color = carDTO.Color;
-            car.EngineСapacity = carDTO.EngineСapacity;
+            car.Engine = carDTO.Engine;
+            car.Price.Add(new Price()
+            {
+                Value = carDTO.Price,
+                CreationDate = DateTime.Now
+            });
+
             _carRepository.Update(car);
             await _unitOfWork.Save();
             return true;

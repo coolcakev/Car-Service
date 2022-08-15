@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { DTOWithTotal } from "src/types/DTOs";
+import { DTOWithTotal, SelectDTO } from "src/types/DTOs";
 import { CreateModelDTO } from "src/types/DTOs/modelDTOs/createModelDTO";
 import { ModelFilteringModel } from "src/types/DTOs/modelDTOs/markFilteringModel";
 import { ModelDTO } from "src/types/DTOs/modelDTOs/modelDTO";
@@ -9,6 +9,10 @@ import { ViewModelDTO } from "src/types/DTOs/modelDTOs/viewModelDTO";
 export const resetModelFilter= createAction('[Model] Reset Model Filter')
 export const setCurrentModelDTO = createAction('[Model] Set Current Edit Model DTO', props<{ modelDTO: ModelDTO }>());
 export const setModelFilteringModel = createAction('[Model] Set Model Filtering Model', props<{ modelFiltering: Partial<ModelFilteringModel> }>());
+
+export const getModelsForSelect = createAction('[Model] Get Models For Select',props<{markId:number}>());
+export const getModelsForSelectSuccess = createAction('[Model] Get Models For Select Success', props<{ selectDTOs: SelectDTO[] }>());
+export const getModelsForSelectFailure = createAction('[Model] Get Models For Select Failure', props<{ error: string }>());
 
 export const getModels = createAction('[Model] Get Models');
 export const getModelsSuccess = createAction('[Model] Get Models Success', props<{ dtoWithTotal: DTOWithTotal<ModelDTO> }>());

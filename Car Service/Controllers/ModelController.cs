@@ -15,6 +15,14 @@ namespace Car_Service.Controllers
         {
             _modelService = modelService;
         }
+
+        [HttpGet("forSelect/{markid}")]
+        public async Task<IActionResult> GetMarksForSelect(int markId)
+        {
+            var marks = await _modelService.GetModelsForSelect(markId);
+            return Ok(marks);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetModel(int id)
         {

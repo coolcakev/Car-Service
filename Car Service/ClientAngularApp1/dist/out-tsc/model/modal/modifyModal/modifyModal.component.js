@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select } from '@ngrx/store';
 import { tap } from 'rxjs';
 import { createModel, updateModel } from 'src/store/actions/model.actions';
+import { selectMarksForSelect } from 'src/store/selectors/mark.selectors';
 import { selectCurrentModel } from 'src/store/selectors/model.selectors';
 let ModifyModalComponent = class ModifyModalComponent {
     constructor(activeModal, store) {
@@ -20,6 +21,7 @@ let ModifyModalComponent = class ModifyModalComponent {
                 this.markId.setValue(model.markId);
             }
         }));
+        this.marksForSelect$ = this.store.pipe(select(selectMarksForSelect));
     }
     get name() {
         return this.form.controls.name;
@@ -30,7 +32,7 @@ let ModifyModalComponent = class ModifyModalComponent {
     ngOnInit() {
     }
     handleMarkIdChange(markId) {
-        this.markId.setValue(markId);
+        this.markId.setValue(Number(markId));
     }
     submit(operation) {
         if (this.form.status != "VALID") {

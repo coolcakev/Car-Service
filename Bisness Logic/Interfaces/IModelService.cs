@@ -15,5 +15,6 @@ namespace Bisness_Logic.Interfaces
         Task Create(CreateModelDTO modelDTO);
         Task<bool> Update(UpdateModelDTO modelDTO);
         Task<bool> Delete(int id);
+        Task<IEnumerable<SelectDTO>> GetModelsForSelect(int markId);
     }
 }

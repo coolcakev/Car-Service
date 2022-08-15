@@ -16,6 +16,18 @@ namespace Car_Service.Controllers
         {
             _carService = carService;
         }
+        [HttpGet("colors")]
+        public async Task<IActionResult> GetColors()
+        {
+            var colors = await _carService.GetColors();
+            return Ok(colors);
+        }
+        [HttpGet("engine")]
+        public async Task<IActionResult> GetEgineCapacities()
+        {
+            var egineCapacities = await _carService.GetEgineCapacities();
+            return Ok(egineCapacities);
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCar(int id)
         {

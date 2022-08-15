@@ -1,0 +1,27 @@
+import { createAction, props } from "@ngrx/store";
+export const resetCarFilter = createAction('[Car] Reset Car Filter');
+export const setCurrentCarDTO = createAction('[Car] Set Current Edit Car DTO', props());
+export const setCarFilteringModel = createAction('[Car] Set Car Filtering Model', props());
+export const getDataForAllFilters = createAction('[Car] Get Data For All Filters');
+export const getMaxPrice = createAction('[Car] Get Max Price');
+export const getMaxPriceSuccess = createAction('[Car] Get Max Price Success', props());
+export const getCarColors = createAction('[Car] Get Car Colors');
+export const getCarColorsSuccess = createAction('[Car] Get Car Colors Success', props());
+export const getCarEngine = createAction('[Car] Get Car Engine Capacity');
+export const getCarEngineSuccess = createAction('[Car] Get Car Engine Capacity Success', props());
+export const getCars = createAction('[Car] Get Cars');
+export const getCarsSuccess = createAction('[Car] Get Cars Success', props());
+export const getCarsFailure = createAction('[Car] Get Cars Failure', props());
+export const getCar = createAction('[Car] Get Car', props());
+export const getCarSuccess = createAction('[Car] Get Car Success', props());
+export const getCarFailure = createAction('[Car] Get Car Failure', props());
+export const createCar = createAction('[Car] Create Car', props());
+export const createCarSuccess = createAction('[Car] Create Car Success');
+export const createCarFailure = createAction('[Car] Create Car Failure', props());
+export const updateCar = createAction('[Car] Update Car', props());
+export const updateCarSuccess = createAction('[Car] Update Car Success');
+export const updateCarFailure = createAction('[Car] Update Car Failure', props());
+export const deleteCar = createAction('[Car] Delete Car', props());
+export const deleteCarSuccess = createAction('[Car] Delete Car Success');
+export const deleteCarFailure = createAction('[Car] Delete Car Failure', props());
+//# sourceMappingURL=car.actions.js.map

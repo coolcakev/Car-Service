@@ -1,0 +1,70 @@
+<ng-container *ngrxLet="car$ | async as car">
+  <form [formGroup]="form" (submit)="submit(car===null ?createCar:updateCar)">
+    <div class="modal-header">
+      <h4 class="modal-title">{{car===null?"Add":"Edit"}} Car</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <div class="form-group">
+          <label>Mark Name</label>
+          <app-markSelector [elementsSelect$]="marksForSelect$" [markId]="car?.mark.id"
+            [hasError]="markId.errors?.min&&isSubmited" (myChange)="handleMarkIdChange($event)">
+          </app-markSelector>
+          <div [ngClass]="{'d-block':markId.errors?.min&&isSubmited}" class="invalid-feedback">
+            Please write car name.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Model Name</label>
+          <app-markSelector [elementsSelect$]="modelsForSelect$" [markId]="car?.model.id"
+            [hasError]="modelId.errors?.min&&isSubmited" (myChange)="handleModelIdChange($event)">
+          </app-markSelector>
+          <div [ngClass]="{'d-block':modelId.errors?.min&&isSubmited}" class="invalid-feedback">
+            Please select model name.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" [ngClass]="{
+             'is-invalid':name.errors?.required&&(name.touched||isSubmited)
+           }" class="form-control is-invalid" formControlName="name" />
+          <div class="invalid-feedback">
+            Please write car name.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" [ngClass]="{
+             'is-invalid':price.errors?.required&&(price.touched||isSubmited)
+           }" class="form-control is-invalid" formControlName="price" />
+          <div class="invalid-feedback">
+            Please write car price.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Color</label>
+          <input type="text" [ngClass]="{
+             'is-invalid':color.errors?.required&&(color.touched||isSubmited)
+           }" class="form-control is-invalid" formControlName="color" />
+          <div class="invalid-feedback">
+            Please write car color.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Engine</label>
+          <input type="text" [ngClass]="{
+             'is-invalid':engine.errors?.required&&(engine.touched||isSubmited)
+           }" class="form-control is-invalid" formControlName="engine" />
+          <div class="invalid-feedback">
+            Please write car engine.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-primary">{{car===null?"Add":"Edit"}}</button>
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  </form>
+</ng-container>

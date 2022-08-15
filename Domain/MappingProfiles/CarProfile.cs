@@ -13,7 +13,8 @@ namespace Domain.MappingProfiles
     {
         public CarProfile()
         {
-            CreateMap<CreateCarDTO, Car>();
+            CreateMap<CreateCarDTO, Car>()
+                .ForMember(x=>x.Price, res => res.MapFrom(x => new List<Price>()));
             CreateMap<UpdateCarDTO, Car>();
             CreateMap<Car, ViewCarDTO>()
                .ForMember(x => x.Model, res => res.MapFrom(x => x.Model))

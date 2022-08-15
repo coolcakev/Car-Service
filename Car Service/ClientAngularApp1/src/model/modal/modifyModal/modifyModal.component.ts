@@ -4,8 +4,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { Observable, tap } from 'rxjs';
 import { createModel, updateModel } from 'src/store/actions/model.actions';
+import { selectMarksForSelect } from 'src/store/selectors/mark.selectors';
 import { selectCurrentModel } from 'src/store/selectors/model.selectors';
 import { AppState } from 'src/store/types';
+import { SelectDTO } from 'src/types/DTOs';
 import { CreateModelDTO } from 'src/types/DTOs/modelDTOs/createModelDTO';
 import { ModelDTO } from 'src/types/DTOs/modelDTOs/modelDTO';
 import { UpdateModelDTO } from 'src/types/DTOs/modelDTOs/updateModelDTO';
@@ -23,6 +25,7 @@ export class ModifyModalComponent implements OnInit {
     name: new FormControl<string>('', [Validators.required]),
     markId: new FormControl<number>(0, [Validators.min(1)]),
   });
+  marksForSelect$: Observable<SelectDTO[]>
 
   constructor(public activeModal: NgbActiveModal,
     private store: Store<AppState>) {
@@ -34,6 +37,9 @@ export class ModifyModalComponent implements OnInit {
           this.markId.setValue(model.markId)
         }
       })
+    )
+    this.marksForSelect$ = this.store.pipe(
+      select(selectMarksForSelect),     
     )
   }
 
@@ -47,8 +53,8 @@ export class ModifyModalComponent implements OnInit {
   ngOnInit() {
 
   }
-  handleMarkIdChange(markId: number) {
-    this.markId.setValue(markId)
+  handleMarkIdChange(markId: string) {
+    this.markId.setValue(Number(markId))
   }
 
   submit(operation: () => void) {

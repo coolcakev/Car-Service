@@ -11,7 +11,7 @@ let TreeEffects = class TreeEffects {
         this.store = store;
         this.treeService = treeService;
         this.getCarTreesNodes$ = createEffect(() => {
-            return this.actions$.pipe(ofType(TreeAction.getCarTreesNodes), take(1), mergeMap(() => this.store.pipe(select(selectCarTreeNodeInfo), take(1), mergeMap((carTreeNodeInfo) => {
+            return this.actions$.pipe(ofType(TreeAction.getCarTreesNodes), mergeMap(() => this.store.pipe(select(selectCarTreeNodeInfo), take(1), mergeMap((carTreeNodeInfo) => {
                 return this.treeService.getCarTreeNode(carTreeNodeInfo).pipe(map(carTreeNodes => TreeAction.getCarTreesNodesSuccess({ carTreeNodes })), catchError((error) => of(TreeAction.getCarTreesNodesFailure({ error: error?.message }))));
             }))));
         });

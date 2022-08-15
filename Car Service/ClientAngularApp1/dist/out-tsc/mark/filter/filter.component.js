@@ -18,7 +18,7 @@ let FilterComponent = class FilterComponent {
             return;
         }
         clearTimeout(this.delayId);
-        delay(500, this).then(() => this.store.dispatch(setMarkFilteringModel({ markFiltering: { searchTerm: target.value } })));
+        delay(500, "delayId", this).then(() => this.store.dispatch(setMarkFilteringModel({ markFiltering: { searchTerm: target.value } })));
     }
 };
 FilterComponent = __decorate([

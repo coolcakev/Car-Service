@@ -43,3 +43,7 @@ export const selectModelTotal=createSelector(
     selectModelFeature,
     (state:ModelState) =>state.totalModels
 )
+export const selectModelsForSelect=createSelector(
+    selectModelFeature,
+    (state:ModelState) =>state.modelsForSelect
+)

@@ -15,5 +15,7 @@ namespace Bisness_Logic.Interfaces
         Task<int> Create(CreateCarDTO carDTO);
         Task<bool> Update(UpdateCarDTO carDTO);
         Task<bool> Delete(int id);
+        Task<IEnumerable<SelectDTO>> GetColors();
+        Task<IEnumerable<SelectDTO>> GetEgineCapacities();
     }
 }

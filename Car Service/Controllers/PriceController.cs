@@ -22,6 +22,13 @@ namespace Car_Service.Controllers
         {
             await _priceService.Create(markDTO);
             return Ok();
-        }      
+        }
+        [HttpGet("maxPrice")]
+        public async Task<IActionResult> GetMaxPrice()
+        {
+            var price=await _priceService.GetMaxPrice();
+            return Ok(price);
+        }
+
     }
 }

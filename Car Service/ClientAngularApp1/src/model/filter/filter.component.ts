@@ -19,6 +19,7 @@ export class FilterComponent implements OnInit {
   delayId: ReturnType<typeof setTimeout>;
   searchTerm$: Observable<string>;
   markId$: Observable<number>;
+  marksForSelect$: Observable<SelectDTO[]>
 
   constructor(private store: Store<AppState>) {
     this.searchTerm$ = this.store.pipe(
@@ -28,6 +29,9 @@ export class FilterComponent implements OnInit {
     this.markId$ = this.store.pipe(
       select(selectModelFiltering),
       map(x => x.markId)
+    )
+    this.marksForSelect$ = this.store.pipe(
+      select(selectMarksForSelect),     
     )
   }
 
@@ -41,11 +45,11 @@ export class FilterComponent implements OnInit {
       return;
     }
     clearTimeout(this.delayId);
-    delay(500, this).then(() => this.store.dispatch(setModelFilteringModel({ modelFiltering: { searchTerm: target.value } })))
+    delay(500,"delayId", this).then(() => this.store.dispatch(setModelFilteringModel({ modelFiltering: { searchTerm: target.value } })))
   }
 
-  handleMarkIdChange(markId: number) {
-    this.store.dispatch(setModelFilteringModel({ modelFiltering: { markId } }))
+  handleMarkIdChange(markId: string) {
+    this.store.dispatch(setModelFilteringModel({ modelFiltering: { markId: Number(markId) } }))
   }
 
 }

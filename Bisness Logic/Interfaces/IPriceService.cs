@@ -10,5 +10,6 @@ namespace Bisness_Logic.Interfaces
     public interface IPriceService
     {
         Task Create(CreatePriceDTO priceDTO);
+        Task<decimal> GetMaxPrice();
     }
 }

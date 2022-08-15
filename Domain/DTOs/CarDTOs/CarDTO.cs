@@ -13,7 +13,7 @@ namespace Domain.DTOs.CarDTOs
         public SelectDTO Mark { get; set; }
         public SelectDTO Model { get; set; }
         public string Color { get; set; }
-        public double EngineСapacity { get; set; }       
+        public string Engine { get; set; }       
         public decimal StartPrice { get; set; }
         public decimal EndPrice { get; set; }
     }

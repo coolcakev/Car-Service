@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import { Observable } from "rxjs/internal/Observable"
-import { DTOWithTotal } from "src/types/DTOs"
+import { DTOWithTotal, SelectDTO } from "src/types/DTOs"
 import { CreateModelDTO } from "src/types/DTOs/modelDTOs/createModelDTO"
 import { ModelFilteringModel } from "src/types/DTOs/modelDTOs/markFilteringModel"
 import { ModelDTO } from "src/types/DTOs/modelDTOs/modelDTO"
@@ -14,6 +14,10 @@ export class ModelService extends BaseService {
   getModel(id: number):Observable<ViewModelDTO> {
     return this.httpClient.get<ViewModelDTO>(`${this.modelApi}/${id}`)
   }
+
+  getModelForSelect(markId:number):Observable<SelectDTO[]> {
+    return this.httpClient.get<SelectDTO[]>(`${this.modelApi}/forSelect/${markId}`)
+  }  
 
   getModels(modelFilter: ModelFilteringModel): Observable<DTOWithTotal<ModelDTO>> {
     return this.httpClient.get<DTOWithTotal<ModelDTO>>(this.modelApi, {

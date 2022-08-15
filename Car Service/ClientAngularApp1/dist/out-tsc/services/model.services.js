@@ -5,6 +5,9 @@ let ModelService = class ModelService extends BaseService {
     getModel(id) {
         return this.httpClient.get(`${this.modelApi}/${id}`);
     }
+    getModelForSelect(markId) {
+        return this.httpClient.get(`${this.modelApi}/forSelect/${markId}`);
+    }
     getModels(modelFilter) {
         return this.httpClient.get(this.modelApi, {
             params: { ...modelFilter }

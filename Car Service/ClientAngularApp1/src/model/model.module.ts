@@ -40,6 +40,9 @@ import { PaginationComponent } from './pagination/pagination.component';
     DeleteModalComponent,
     PaginationComponent,
   ],
+  exports: [
+    MarkSelectorComponent
+  ],
   bootstrap: [ModelComponent]
 })
 export class ModelModule { }

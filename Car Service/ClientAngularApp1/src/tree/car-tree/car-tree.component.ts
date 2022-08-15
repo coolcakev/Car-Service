@@ -3,10 +3,12 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { setCarFilteringModel } from 'src/store/actions/car.actions';
 import { getCarTreesNodes, setCarTreeNodeInfo } from 'src/store/actions/tree.actions';
 import { selectCarTreeNodes, selectCarTreeNodesLoading, selectCurrentCarTreeNode } from 'src/store/selectors/tree.selectors';
 import { AppState } from 'src/store/types';
 import { CarTreeNode } from 'src/types/DTOs/TreeDTOs';
+import { CarTreeNodeType } from 'src/types/DTOs/TreeDTOs/CarTreeNodeDTOs/CarTreeNodeType';
 import * as TreeActions from '../../store/actions/tree.actions'
 
 @Component({
@@ -88,5 +90,20 @@ export class CarTreeComponent implements OnInit, OnDestroy {
     this.store.dispatch(TreeActions.colapseCarTreeNode({
       treeNode: node
     }))
+  }
+  NodeClcik(event: Event, node: CarTreeNode) {
+    switch (node.level) {
+      case CarTreeNodeType.MarkType:
+        this.store.dispatch(setCarFilteringModel({ carFiltering: { modelId:0,markId: node.id } }))
+        break;
+      case CarTreeNodeType.ModelType:
+        this.store.dispatch(setCarFilteringModel({ carFiltering: { modelId: node.id,markId:0 } }))
+        break;
+
+      default:
+        break;
+    }
+
+
   }
 }

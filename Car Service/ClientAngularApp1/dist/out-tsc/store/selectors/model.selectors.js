@@ -10,4 +10,5 @@ export const selectCurrentViewModel = createSelector(selectModelFeature, (state)
 export const selectError = createSelector(selectModelFeature, (state) => state.error);
 export const selectModels = createSelector(selectModelFeature, (state) => state.models);
 export const selectModelTotal = createSelector(selectModelFeature, (state) => state.totalModels);
+export const selectModelsForSelect = createSelector(selectModelFeature, (state) => state.modelsForSelect);
 //# sourceMappingURL=model.selectors.js.map

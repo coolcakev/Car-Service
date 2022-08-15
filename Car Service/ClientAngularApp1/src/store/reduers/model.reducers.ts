@@ -22,6 +22,8 @@ export const initialState: ModelState = {
     totalModels: 0,
     models: [],    
     modelFiltering: resetModelFilter(),
+    loadingForModelSelect: false,
+    modelsForSelect:[]
 }
 
 export const modelReducer = createReducer(
@@ -30,6 +32,10 @@ export const modelReducer = createReducer(
     on(ModelAction.setCurrentModelDTO, (state, action) => ({ ...state, currentModel: action.modelDTO })),
     on(ModelAction.setModelFilteringModel, (state, action) => ({ ...state, modelFiltering: { ...state.modelFiltering, ...action.modelFiltering, } })),
 
+    on(ModelAction.getModelsForSelect, state => ({ ...state, loadingForModelSelect: true, error: null })),
+    on(ModelAction.getModelsForSelectSuccess, (state, action) => ({ ...state, loadingForModelSelect: false, modelsForSelect: action.selectDTOs})),
+    on(ModelAction.getModelsForSelectFailure, (state, action) => ({ ...state, loadingForModelSelect: false, error: action.error })),
+    
     on(ModelAction.getModels, state => ({ ...state, loading: true, error: null })),
     on(ModelAction.getModelsSuccess, (state, action) => ({ ...state, loading: false, models: action.dtoWithTotal.dtoObjects,totalModels: action.dtoWithTotal.total})),
     on(ModelAction.getModelsFailure, (state, action) => ({ ...state, loading: false, error: action.error })),

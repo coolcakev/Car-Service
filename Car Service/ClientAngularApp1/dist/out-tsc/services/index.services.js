@@ -8,6 +8,8 @@ let BaseService = class BaseService {
         this.markApi = `${this.api}/marks`;
         this.modelApi = `${this.api}/models`;
         this.treeApi = `${this.api}/tree`;
+        this.carApi = `${this.api}/cars`;
+        this.priceApi = `${this.api}/price`;
     }
 };
 BaseService = __decorate([

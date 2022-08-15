@@ -1,3 +1,4 @@
+import { SelectDTO } from "src/types/DTOs";
 import { ModelFilteringModel } from "src/types/DTOs/modelDTOs/markFilteringModel";
 import { ModelDTO } from "src/types/DTOs/modelDTOs/modelDTO";
 import { ViewModelDTO } from "src/types/DTOs/modelDTOs/viewModelDTO";
@@ -10,4 +11,6 @@ export interface ModelState {
     totalModels: number,
     models: ModelDTO[];
     error: string;
+    loadingForModelSelect:boolean;
+    modelsForSelect:SelectDTO[]
 }

@@ -18,27 +18,37 @@ namespace Data_Access.Repositories
         public Task<(List<Car> entities, int total)> GetCars(CarFilteringModel filteringModel)
         {
             IQueryable<Car> query = _context.Set<Car>().Where(x => x.Name.Contains(filteringModel.SearchTerm)
-                                                    && x.Color == filteringModel.Color
-                                                    && x.EngineСapacity == filteringModel.EgineCapacity
-                                                    && x.Price.Any(x => x.CreationDate == filteringModel.PriceDate
-                                                                       && x.Value > filteringModel.StartPrice
-                                                                       && x.Value < filteringModel.EndPrice));
-
-            if (filteringModel.MarkId != 0)
+                                                    && x.Price.Any(x => x.CreationDate.Date == filteringModel.PriceDate.Date
+                                                                       && x.Value > filteringModel.StartPrice));
+            if (filteringModel.EndPrice > 0)
+            {
+                query = query.Where(x => x.Price.Any(x => x.Value < filteringModel.EndPrice));
+            }
+            if (!string.IsNullOrWhiteSpace(filteringModel.Engine))
+            {
+                query = query.Where(x => x.Engine == filteringModel.Engine);
+            }
+            if (!string.IsNullOrWhiteSpace(filteringModel.Color))
+            {
+                query = query.Where(x => x.Color == filteringModel.Color);
+            }
+            if (filteringModel.MarkId > 0)
             {
                 query = query.Where(x => x.MarkId == filteringModel.MarkId);
             }
-            if (filteringModel.ModelId != 0)
+            if (filteringModel.ModelId > 0)
             {
                 query = query.Where(x => x.ModelId == filteringModel.ModelId);
             }
-           
-            return GetFilteredWithTotalSumWithQurable(filteringModel, query, 
+
+
+
+            return GetFilteredWithTotalSumWithQurable(filteringModel, query,
                 x => x.Include(y => y.Mark)
                              .Include(x => x.Model)
-                             .Include(x => x.Price.Where(x => x.CreationDate == filteringModel.PriceDate
+                             .Include(x => x.Price.Where(x => x.CreationDate.Date == filteringModel.PriceDate.Date
                                                                     && x.Value > filteringModel.StartPrice
-                                                                    && x.Value < filteringModel.EndPrice)));
+                                                                    || (x.Value < filteringModel.EndPrice&& filteringModel.EndPrice > 0))));
         }
     }
 }

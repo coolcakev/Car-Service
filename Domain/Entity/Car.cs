@@ -15,7 +15,7 @@ namespace Domain.Entity
         public int ModelId { get; set; }
         public Model Model { get; set; }
         public string Color { get; set; }
-        public string EngineСapacity { get; set; }
+        public string Engine { get; set; }
         public List<Price> Price { get; set; }
     }
 }

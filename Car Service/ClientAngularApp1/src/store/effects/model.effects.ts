@@ -93,6 +93,20 @@ export class ModelEffects {
             ),
         );
     });
+
+    getModelsForSelect$ = createEffect(() =>
+    this.actions$.pipe(
+        ofType(ModelAction.getModelsForSelect),
+        map(action=>action.markId),
+        mergeMap((markId) =>
+            this.modelService.getModelForSelect(markId).pipe(
+                map(selectDTOs => ModelAction.getModelsForSelectSuccess({ selectDTOs })),
+                catchError((error: HttpErrorResponse) =>
+                    of(ModelAction.getModelsForSelectFailure({ error: error?.message }))
+                )
+            )
+        ),
+    ));
     
 
     constructor(

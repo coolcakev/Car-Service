@@ -20,7 +20,7 @@ namespace Data_Access.Repositories
         {
             IQueryable<Model> query = _context.Set<Model>().Where(x=>x.Name.Contains(filteringModel.SearchTerm)); 
 
-            if (filteringModel.MarkId != 0)
+            if (filteringModel.MarkId > 0)
             {
                 query= query.Where(x => x.MarkId == filteringModel.MarkId);                
             }

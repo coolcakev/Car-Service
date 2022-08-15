@@ -28,6 +28,7 @@ let ModelEffects = class ModelEffects {
         this.getModel$ = createEffect(() => {
             return this.actions$.pipe(ofType(ModelAction.getModel), map((action) => action.id), mergeMap((modelId) => this.modelService.getModel(modelId).pipe(map(model => ModelAction.getModelSuccess({ model })), catchError((error) => of(ModelAction.getModelFailure({ error: error.message }))))));
         });
+        this.getModelsForSelect$ = createEffect(() => this.actions$.pipe(ofType(ModelAction.getModelsForSelect), map(action => action.markId), mergeMap((markId) => this.modelService.getModelForSelect(markId).pipe(map(selectDTOs => ModelAction.getModelsForSelectSuccess({ selectDTOs })), catchError((error) => of(ModelAction.getModelsForSelectFailure({ error: error?.message })))))));
     }
 };
 ModelEffects = __decorate([

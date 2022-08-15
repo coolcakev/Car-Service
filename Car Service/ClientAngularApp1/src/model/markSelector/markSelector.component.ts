@@ -11,28 +11,19 @@ import { SelectDTO } from 'src/types/DTOs';
   templateUrl: './markSelector.component.html',
   styleUrls: ['./markSelector.component.css']
 })
-export class MarkSelectorComponent implements OnInit {
+export class MarkSelectorComponent  {
 
+  @Input() allValueName:string
   @Input() hasError: boolean = false;
   @Input() markId: number | null
-  @Output() myChange = new EventEmitter<number>();
-  marksForSelect$: Observable<SelectDTO[]>
-
-  constructor(private store: Store<AppState>) {
-    this.marksForSelect$ = this.store.pipe(
-      select(selectMarksForSelect)
-    )
-   }
-
-  ngOnInit() {
-    this.store.dispatch(getMarksForSelect())
-  }
+  @Input() elementsSelect$: Observable<SelectDTO[]>
+  @Output() myChange = new EventEmitter<string>();
 
   handleMarkIdChange(event: Event) {
     var target = event.target as HTMLInputElement;
     if (target == null) {
       return;
     }
-    this.myChange.next(Number(target.value));
+    this.myChange.next(target.value);
   }
 }

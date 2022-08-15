@@ -1,3 +1,33 @@
-<p>
-  view-car works!
-</p>
+<div class="container" *ngIf="car$ | async as car">
+  <label>
+    Name
+  </label>
+  <h2>{{car.name}}</h2>
+  <br />
+  <label>
+    Mark names
+  </label>
+  <div>
+    <div class="list-group">
+      <a routerLink="/mark/{{car.mark.id}}" class="list-group-item list-group-item-action">{{car.mark.name}}</a>
+    </div>
+  </div>
+  <br />
+  <label>
+    Model names
+  </label>
+  <div>
+    <div class="list-group">
+      <a routerLink="/model/{{car.model.id}}" class="list-group-item list-group-item-action">{{car.model.name}}</a>
+    </div>
+  </div>
+  <br/>
+  <label>
+    Color
+  </label>
+  <h2>{{car.color}}</h2>
+  <label>
+    Engine
+  </label>
+  <h2>{{car.engine}}</h2>
+</div>

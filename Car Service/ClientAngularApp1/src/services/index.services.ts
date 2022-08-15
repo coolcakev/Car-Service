@@ -8,6 +8,8 @@ export class BaseService {
     protected markApi=`${this.api}/marks`
     protected modelApi=`${this.api}/models`
     protected treeApi=`${this.api}/tree`
+    protected carApi=`${this.api}/cars`
+    protected priceApi=`${this.api}/price`
     constructor(protected httpClient: HttpClient) { }
     
 }

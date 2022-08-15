@@ -4,6 +4,7 @@ import { select } from '@ngrx/store';
 import { map } from 'rxjs';
 import { getMarksForSelect } from 'src/store/actions/mark.actions';
 import { setModelFilteringModel } from 'src/store/actions/model.actions';
+import { selectMarksForSelect } from 'src/store/selectors/mark.selectors';
 import { selectModelFiltering } from 'src/store/selectors/model.selectors';
 import { delay } from 'src/utility/delay';
 let FilterComponent = class FilterComponent {
@@ -11,6 +12,7 @@ let FilterComponent = class FilterComponent {
         this.store = store;
         this.searchTerm$ = this.store.pipe(select(selectModelFiltering), map(x => x.searchTerm));
         this.markId$ = this.store.pipe(select(selectModelFiltering), map(x => x.markId));
+        this.marksForSelect$ = this.store.pipe(select(selectMarksForSelect));
     }
     ngOnInit() {
         this.store.dispatch(getMarksForSelect());
@@ -21,10 +23,10 @@ let FilterComponent = class FilterComponent {
             return;
         }
         clearTimeout(this.delayId);
-        delay(500, this).then(() => this.store.dispatch(setModelFilteringModel({ modelFiltering: { searchTerm: target.value } })));
+        delay(500, "delayId", this).then(() => this.store.dispatch(setModelFilteringModel({ modelFiltering: { searchTerm: target.value } })));
     }
     handleMarkIdChange(markId) {
-        this.store.dispatch(setModelFilteringModel({ modelFiltering: { markId } }));
+        this.store.dispatch(setModelFilteringModel({ modelFiltering: { markId: Number(markId) } }));
     }
 };
 FilterComponent = __decorate([

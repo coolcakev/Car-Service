@@ -1,0 +1,8 @@
+
+<app-pagination></app-pagination>
+<mat-grid-list [ngClass]="{'mt-3':true}" [cols]="colomnCount$ | async" [rowHeight]="countColomnToRowHeight[colomnCount$ | async]">
+  <mat-grid-tile *ngFor="let car of cars$ |async">
+    <app-car-item [ngClass]="{'w-100':true}" [car]="car"></app-car-item>
+  </mat-grid-tile>
+</mat-grid-list>
+<app-pagination></app-pagination>

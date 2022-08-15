@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 namespace Data_Access
 {
     public class ApplicationContext : DbContext
-    {
+    {     
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-            //Database.EnsureDeleted();
-            Database.EnsureCreated();   // создаем базу данных при первом обращении
+            //Database.EnsureDeleted();           
+        }
+        public void CreateDataBase() {
+            Database.EnsureCreated();
         }
 
         public DbSet<Car> Cars { get; set; }

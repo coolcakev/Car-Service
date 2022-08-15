@@ -1,7 +1,6 @@
-import { Delay } from "src/types/utitiesType/delayType"
 
-export const delay = (ms: number, delay: Delay) => {
+export const delay = <T>(ms: number, nameDelay: keyof T, delay: any) => {
     return new Promise(resolve => {
-        delay.delayId = setTimeout(resolve, ms)
+        delay[nameDelay] = setTimeout(resolve, ms)
     })
 }

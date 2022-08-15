@@ -1,0 +1,35 @@
+<mat-card class="example-card">
+  <mat-card-subtitle >{{car.mark.name}}</mat-card-subtitle>
+  <mat-card-title [ngClass]="{'d-flex justify-content-between':true}">
+    <div>
+      {{car.name}}
+    </div>
+    <div>
+      {{car.startPrice==car.endPrice?car.endPrice:car.startPrice+" - "+car.endPrice}} $
+    </div>
+  </mat-card-title>
+  <mat-card-content [ngClass]="{'d-flex flex-wrap':true}">
+    <div class="w-50">
+      <label>Mark :</label>
+      <p>{{car.mark.name}}</p>
+    </div>
+    <div>
+      <label>Model :</label>
+      <p>{{car.model.name}}</p>
+    </div>
+    <div class="w-50">
+      <label>Color :</label>
+      <p>{{car.color}}</p>
+    </div>
+    <div>
+      <label>Engine :</label>
+      <p>{{car.engine}}</p>
+    </div>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions [ngClass]="{'d-flex':true}">
+    <button type="button" class="btn btn-primary editButton" routerLink="./{{car.id}}">View</button>
+    <button type="button" class="btn btn-danger editButton" (click)="editHandle(car)">Edit</button>
+    <button type="button" class="btn btn-warning" (click)="deleteHandle(car)">Delete</button>
+  </mat-card-actions>
+</mat-card>

@@ -2,5 +2,5 @@
   <input type="text" class="form-control w-25 intput" placeholder="Enter mark" [value]="searchTerm$|async"
     (input)="hendleSearchTermChange($event)">
 
-  <app-markSelector [markId]="markId$|async" (myChange)="handleMarkIdChange($event)" ></app-markSelector>
+  <app-markSelector [elementsSelect$]="marksForSelect$" [markId]="markId$|async" (myChange)="handleMarkIdChange($event)" ></app-markSelector>
 </div>

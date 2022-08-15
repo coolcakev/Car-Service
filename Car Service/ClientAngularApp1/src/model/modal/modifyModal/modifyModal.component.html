@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label>Mark Name</label>
-          <app-markSelector [markId]="model?.markId" [hasError]="markId.errors?.min&&isSubmited"
+          <app-markSelector [elementsSelect$]="marksForSelect$" [markId]="model?.markId" [hasError]="markId.errors?.min&&isSubmited"
             (myChange)="handleMarkIdChange($event)">
           </app-markSelector>
           <div [ngClass]="{'displayDiv':markId.errors?.min&&isSubmited}"
