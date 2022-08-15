@@ -123,11 +123,15 @@ namespace Bisness_Logic.Services
             car.ModelId = carDTO.ModelId;
             car.Color = carDTO.Color;
             car.Engine = carDTO.Engine;
-            car.Price.Add(new Price()
+
+            if (car.Price.Last().Value != carDTO.Price)
             {
-                Value = carDTO.Price,
-                CreationDate = DateTime.Now
-            });
+                car.Price.Add(new Price()
+                {
+                    Value = carDTO.Price,
+                    CreationDate = DateTime.Now
+                });
+            }
 
             _carRepository.Update(car);
             await _unitOfWork.Save();

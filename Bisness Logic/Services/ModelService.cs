@@ -37,12 +37,18 @@ namespace Bisness_Logic.Services
 
         public async Task<bool> Delete(int id)
         {
-            var result = await _modelRepository.DeleteById(id);
-            if (result)
+            var model = (await _modelRepository.GetByIdWithInclude(id, x =>x.Include(x => x.Cars)
+                                                                            .Include(x => x.Cars)
+                                                                                .ThenInclude(x => x.Price)
+                                                                            )) as Model;
+            if (model == null)
             {
-                await _unitOfWork.Save();
+                return false;
             }
-            return result;
+
+            _modelRepository.Delete(model);
+            await _unitOfWork.Save();
+            return true;
 
         }
 

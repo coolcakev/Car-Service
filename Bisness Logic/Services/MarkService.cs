@@ -36,18 +36,25 @@ namespace Bisness_Logic.Services
 
         public async Task<bool> Delete(int id)
         {
-            var result = await _markRepository.DeleteById(id);
-            if (result)
+            var mark = (await _markRepository.GetByIdWithInclude(id, x => x.Include(x => x.Models)
+                                                                            .Include(x => x.Cars)
+                                                                            .Include(x => x.Cars)
+                                                                                .ThenInclude(x=>x.Price)
+                                                                            )) as Mark;
+            if (mark == null)
             {
-                await _unitOfWork.Save();
+                return false;
             }
-            return result;
+
+            _markRepository.Delete(mark);
+            await _unitOfWork.Save();
+            return true;
 
         }
 
         public async Task<ViewMarkDTO> GetMark(int id)
         {
-            var mark = await _markRepository.GetByIdWithInclude(id, x => x.Include(x => x.Models).Include(x=>x.Cars));
+            var mark = await _markRepository.GetByIdWithInclude(id, x => x.Include(x => x.Models).Include(x => x.Cars));
             var markDTO = _mapper.Map<ViewMarkDTO>(mark);
             return markDTO;
         }
@@ -69,11 +76,11 @@ namespace Bisness_Logic.Services
         }
 
         public async Task<IEnumerable<SelectDTO>> GetMarksForSelect()
-        {           
+        {
             var marks = await _markRepository.GetAll();
 
             var markDTOs = _mapper.Map<IEnumerable<SelectDTO>>(marks);
-           
+
             return markDTOs;
         }
 
@@ -84,7 +91,7 @@ namespace Bisness_Logic.Services
             {
                 return false;
             }
-            
+            mark.Name = markDTO.Name;
             _markRepository.Update(mark);
             await _unitOfWork.Save();
             return true;

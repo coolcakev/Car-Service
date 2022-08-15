@@ -16,7 +16,7 @@ export class CarEffects {
     setGridColomnCount$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(CarAction.setGridColomnCount),
-            map(({ colomnCount,page }) => CarAction.setCarFilteringModel({ carFiltering: { page,count: colomnCount * countRowInGrid } }))
+            map(({ colomnCount, page }) => CarAction.setCarFilteringModel({ carFiltering: { page, count: colomnCount * countRowInGrid } }))
         );
     });
 
@@ -81,13 +81,19 @@ export class CarEffects {
                     }),
                     mergeMap((car) =>
                         this.carService.updateCar(car).pipe(
-                            map(cars => CarAction.updateCarSuccess()),
-                            map(cars => CarAction.getCars()),
+                            switchMap(() => of(
+                                CarAction.updateCarSuccess(),
+                                CarAction.getCars(),
+                                CarAction.getCarColors(),
+                                CarAction.getCarEngine(),
+                                CarAction.getMaxPrice(),
+                            )
+
+                            ),
                             catchError((error: HttpErrorResponse) => of(CarAction.updateCarFailure({ error: error.message }))))
                     ),
                 )
             )
-
         );
     });
 

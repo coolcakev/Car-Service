@@ -1,6 +1,6 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
-import { setCurrentModelDTO } from 'src/store/actions/model.actions';
+import { resetModelFilter, setCurrentModelDTO } from 'src/store/actions/model.actions';
 import { ModifyModalComponent } from './modal/modifyModal/modifyModal.component';
 let ModelComponent = class ModelComponent {
     constructor(modalService, store) {
@@ -8,6 +8,7 @@ let ModelComponent = class ModelComponent {
         this.store = store;
     }
     ngOnInit() {
+        this.store.dispatch(resetModelFilter());
     }
     openCreteModal() {
         this.store.dispatch(setCurrentModelDTO({ modelDTO: null }));

@@ -28,37 +28,23 @@ namespace Data_Access
             modelBuilder.Entity<Mark>()
                 .HasMany(p => p.Models)
                 .WithOne(x => x.Mark)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Mark>()
                 .HasMany(p => p.Cars)
                 .WithOne(x => x.Mark)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Model>()
-               .HasOne(p => p.Mark)
-               .WithMany(x => x.Models)
-               .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientCascade);
+       
 
             modelBuilder.Entity<Model>()
                  .HasMany(p => p.Cars)
                  .WithOne(x => x.Model)
-                 .OnDelete(DeleteBehavior.Cascade);
+                 .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Car>()
                 .HasMany(p => p.Price)
                 .WithOne(x => x.Car)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Car>()
-               .HasOne(p => p.Mark)
-               .WithMany(x => x.Cars)
-               .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<Car>()
-               .HasOne(p => p.Model)
-               .WithMany(x => x.Cars)
-               .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientCascade);            
 
         }
 

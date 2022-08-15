@@ -87,4 +87,7 @@ export class FilterComponent implements OnInit {
     this.store.dispatch(CarAction.setCarFilteringModel({ carFiltering: { priceDate: event.value } }))
   }
 
+  hendleGetCarsAllMarks(event: Event) {
+    this.store.dispatch(CarAction.setCarFilteringModel({ carFiltering: { markId: 0,modelId:0 } }))
+  }
 }

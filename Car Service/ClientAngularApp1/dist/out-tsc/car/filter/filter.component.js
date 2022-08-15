@@ -48,6 +48,9 @@ let FilterComponent = class FilterComponent {
     handleDateChange(event) {
         this.store.dispatch(CarAction.setCarFilteringModel({ carFiltering: { priceDate: event.value } }));
     }
+    hendleGetCarsAllMarks(event) {
+        this.store.dispatch(CarAction.setCarFilteringModel({ carFiltering: { markId: 0, modelId: 0 } }));
+    }
 };
 FilterComponent = __decorate([
     Component({
