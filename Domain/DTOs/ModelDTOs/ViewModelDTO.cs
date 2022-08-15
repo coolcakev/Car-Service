@@ -10,5 +10,6 @@ namespace Domain.DTOs.ModelDTOs
     {
         public string Name { get; set; }
         public SelectDTO Mark { get; set; }
+        public List<SelectDTO> Cars { get; set; }
     }
 }

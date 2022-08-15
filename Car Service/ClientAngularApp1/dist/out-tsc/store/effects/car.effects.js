@@ -4,6 +4,7 @@ import { createEffect, ofType } from "@ngrx/effects";
 import { select } from "@ngrx/store";
 import { catchError, map, mergeMap, of, switchMap, take } from "rxjs";
 import * as CarAction from "../actions/car.actions";
+import { countRowInGrid } from "../reduers/car.reducers";
 import * as CarSelection from "../selectors/car.selectors";
 let CarEffects = class CarEffects {
     constructor(actions$, store, carService, priceService) {
@@ -11,6 +12,9 @@ let CarEffects = class CarEffects {
         this.store = store;
         this.carService = carService;
         this.priceService = priceService;
+        this.setGridColomnCount$ = createEffect(() => {
+            return this.actions$.pipe(ofType(CarAction.setGridColomnCount), map(({ colomnCount, page }) => CarAction.setCarFilteringModel({ carFiltering: { page, count: colomnCount * countRowInGrid } })));
+        });
         this.setCarFilteringModel$ = createEffect(() => {
             return this.actions$.pipe(ofType(CarAction.setCarFilteringModel), map(() => CarAction.getCars()));
         });

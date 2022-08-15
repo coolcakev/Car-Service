@@ -1,8 +1,10 @@
 import { createAction, props } from "@ngrx/store";
+export const resetCurrentCarViewDTO = createAction('[Car] Reset Current Car View DTO');
 export const resetCarFilter = createAction('[Car] Reset Car Filter');
 export const setCurrentCarDTO = createAction('[Car] Set Current Edit Car DTO', props());
 export const setCarFilteringModel = createAction('[Car] Set Car Filtering Model', props());
 export const getDataForAllFilters = createAction('[Car] Get Data For All Filters');
+export const setGridColomnCount = createAction('[Car] Set Grid Colomn Count', props());
 export const getMaxPrice = createAction('[Car] Get Max Price');
 export const getMaxPriceSuccess = createAction('[Car] Get Max Price Success', props());
 export const getCarColors = createAction('[Car] Get Car Colors');

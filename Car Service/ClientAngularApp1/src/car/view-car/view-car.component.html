@@ -21,7 +21,7 @@
       <a routerLink="/model/{{car.model.id}}" class="list-group-item list-group-item-action">{{car.model.name}}</a>
     </div>
   </div>
-  <br/>
+  <br />
   <label>
     Color
   </label>
@@ -30,4 +30,8 @@
     Engine
   </label>
   <h2>{{car.engine}}</h2>
+  <label>
+    Price
+  </label>
+  <app-price-chart *ngIf="car.price" [price]="car.price"></app-price-chart>
 </div>

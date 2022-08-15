@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.DTOs;
 using Domain.DTOs.CarDTOs;
 using Domain.Entity;
 using System;
@@ -13,6 +14,7 @@ namespace Domain.MappingProfiles
     {
         public CarProfile()
         {
+            CreateMap<Car, SelectDTO>();
             CreateMap<CreateCarDTO, Car>()
                 .ForMember(x=>x.Price, res => res.MapFrom(x => new List<Price>()));
             CreateMap<UpdateCarDTO, Car>();

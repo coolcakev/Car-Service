@@ -4,12 +4,24 @@
   </label>
   <h2>{{model.name}}</h2>
   <br />
-  <h5><label>
-      Model names
-    </label></h5>
+  <label>
+    Model names
+  </label>
   <div>
-    <div class="list-group">      
-      <a routerLink="/mark/{{model.mark.id}}" class="list-group-item list-group-item-action">{{model.mark.name}}</a>     
-    </div>  
+    <div class="list-group">
+      <a routerLink="/mark/{{model.mark.id}}" class="list-group-item list-group-item-action">{{model.mark.name}}</a>
+    </div>
+  </div>
+  <br />
+  <div *ngIf="model.cars.length>0">
+    <label>
+      Cars
+    </label>
+    <div>
+      <div class="list-group">
+        <a *ngFor="let car of model.cars" routerLink="/car/{{car.id}}"
+          class="list-group-item list-group-item-action">{{car.name}}</a>
+      </div>
+    </div>
   </div>
 </div>

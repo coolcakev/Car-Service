@@ -63,3 +63,7 @@ export const selectPageSize=createSelector(
     selectCarFeature,
     (state:CarState) =>state.colomnCount*countRowInGrid
 )
+export const selectCurrentCarLoading=createSelector(
+    selectCarFeature,
+    (state:CarState) =>state.currentViewCarLoading
+)

@@ -4,12 +4,29 @@
   </label>
   <h2>{{mark.name}}</h2>
   <br />
-  <h5><label>
+  <div *ngIf="mark.models.length>0">
+    <label>
       Model names
-    </label></h5>
-  <div>
-    <div class="list-group">      
-      <a *ngFor="let model of mark.models" routerLink="/model/{{model.id}}" class="list-group-item list-group-item-action">{{model.name}}</a>     
-    </div>  
+    </label>
+    <div>
+      <div class="list-group">
+        <a *ngFor="let model of mark.models" routerLink="/model/{{model.id}}"
+          class="list-group-item list-group-item-action">{{model.name}}</a>
+      </div>
+    </div>
   </div>
+
+  <br />
+  <div *ngIf="mark.cars.length>0">
+    <label>
+      Cars
+    </label>
+    <div>
+      <div class="list-group">
+        <a *ngFor="let car of mark.cars" routerLink="/car/{{car.id}}"
+          class="list-group-item list-group-item-action">{{car.name}}</a>
+      </div>
+    </div>
+  </div>
+
 </div>

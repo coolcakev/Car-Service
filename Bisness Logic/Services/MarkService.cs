@@ -47,7 +47,7 @@ namespace Bisness_Logic.Services
 
         public async Task<ViewMarkDTO> GetMark(int id)
         {
-            var mark = await _markRepository.GetByIdWithInclude(id, x => x.Include(x => x.Models));
+            var mark = await _markRepository.GetByIdWithInclude(id, x => x.Include(x => x.Models).Include(x=>x.Cars));
             var markDTO = _mapper.Map<ViewMarkDTO>(mark);
             return markDTO;
         }

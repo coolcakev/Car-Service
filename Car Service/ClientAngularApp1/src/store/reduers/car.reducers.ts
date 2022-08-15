@@ -25,6 +25,7 @@ export const initialState: CarState = {
     loading: false,
     currentCar: null,
     currentViewCar: null,
+    currentViewCarLoading:false,
     error: null,
     totalCars: 0,
     cars: [],
@@ -42,9 +43,9 @@ export const carReducer = createReducer(
     on(CarAction.setCarFilteringModel, (state, action) => ({ ...state, carFiltering: { ...state.carFiltering, ...action.carFiltering, } })),
     on(CarAction.setGridColomnCount, (state, action) => ({ ...state, colomnCount: action.colomnCount })),
 
-    on(CarAction.getCars, state => ({ ...state, loading: true, error: null })),
-    on(CarAction.getCarsSuccess, (state, action) => ({ ...state, loading: false, cars: action.dtoWithTotal.dtoObjects,totalCars: action.dtoWithTotal.total})),
-    on(CarAction.getCarsFailure, (state, action) => ({ ...state, loading: false, error: action.error })),
+    on(CarAction.getCars, state => ({ ...state, currentViewCarLoading: true, error: null })),
+    on(CarAction.getCarsSuccess, (state, action) => ({ ...state, currentViewCarLoading: false, cars: action.dtoWithTotal.dtoObjects,totalCars: action.dtoWithTotal.total})),
+    on(CarAction.getCarsFailure, (state, action) => ({ ...state, currentViewCarLoading: false, error: action.error })),
 
     on(CarAction.getMaxPrice, state => ({ ...state, error: null })),
     on(CarAction.getMaxPriceSuccess, (state, action) => ({ ...state, maxPrice: action.maxPrice })),

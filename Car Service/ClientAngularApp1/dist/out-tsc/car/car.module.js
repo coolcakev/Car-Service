@@ -17,6 +17,10 @@ import { ModifyModalComponent } from './modal/modify-modal/modify-modal.componen
 import { LetModule } from '@ngrx/component';
 import { CarItemComponent } from './car-grid/car-item/car-item.component';
 import { DeleteModalComponent } from './modal/delete-modal/delete-modal.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { PriceChartComponent } from './view-car/price-chart/price-chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxRerenderModule } from 'ngx-rerender';
 let CarModule = class CarModule {
 };
 CarModule = __decorate([
@@ -30,7 +34,9 @@ CarModule = __decorate([
             NgxSliderModule,
             MaterialModule,
             ReactiveFormsModule,
-            LetModule
+            LetModule,
+            NgxChartsModule,
+            NgxRerenderModule
         ],
         declarations: [
             CarComponent,
@@ -39,7 +45,9 @@ CarModule = __decorate([
             CarGridComponent,
             ModifyModalComponent,
             CarItemComponent,
-            DeleteModalComponent
+            DeleteModalComponent,
+            PaginationComponent,
+            PriceChartComponent
         ]
     })
 ], CarModule);

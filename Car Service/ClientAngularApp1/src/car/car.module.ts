@@ -17,6 +17,9 @@ import { LetModule } from '@ngrx/component';
 import { CarItemComponent } from './car-grid/car-item/car-item.component';
 import { DeleteModalComponent } from './modal/delete-modal/delete-modal.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { PriceChartComponent } from './view-car/price-chart/price-chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxRerenderModule } from 'ngx-rerender';
 
 @NgModule({
   imports: [
@@ -28,7 +31,9 @@ import { PaginationComponent } from './pagination/pagination.component';
     NgxSliderModule,
     MaterialModule  ,
     ReactiveFormsModule,
-    LetModule
+    LetModule,
+    NgxChartsModule,
+    NgxRerenderModule
   ],
   declarations: [
     CarComponent,
@@ -38,7 +43,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     ModifyModalComponent,
     CarItemComponent,
     DeleteModalComponent,
-    PaginationComponent
+    PaginationComponent,
+    PriceChartComponent
   ]
 })
 export class CarModule { }

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { carFeatureKey } from "../reduers/car.reducers";
+import { carFeatureKey, countRowInGrid } from "../reduers/car.reducers";
 export const selectCarFeature = createFeatureSelector(carFeatureKey);
 export const selectCarFiltering = createSelector(selectCarFeature, (state) => state.carFiltering);
 export const selectCarPageSize = createSelector(selectCarFeature, (state) => state.carFiltering.count);
@@ -13,4 +13,7 @@ export const selectCarTotal = createSelector(selectCarFeature, (state) => state.
 export const selectColors = createSelector(selectCarFeature, (state) => state.colors);
 export const selectEngine = createSelector(selectCarFeature, (state) => state.engine);
 export const selectMaxPrice = createSelector(selectCarFeature, (state) => state.maxPrice + 1);
+export const selectColomnCount = createSelector(selectCarFeature, (state) => state.colomnCount);
+export const selectPageSize = createSelector(selectCarFeature, (state) => state.colomnCount * countRowInGrid);
+export const selectCurrentCarLoading = createSelector(selectCarFeature, (state) => state.currentViewCarLoading);
 //# sourceMappingURL=car.selectors.js.map

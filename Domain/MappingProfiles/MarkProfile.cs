@@ -19,7 +19,8 @@ namespace Domain.MappingProfiles
             CreateMap<CreateMarkDTO, Mark>();
             CreateMap<UpdateMarkDTO, Mark>();
             CreateMap<Mark, ViewMarkDTO>()
-                .ForMember(x=>x.Models,res=>res.MapFrom(x=>x.Models));
+                .ForMember(x=>x.Models,res=>res.MapFrom(x=>x.Models))
+                .ForMember(x=>x.Cars,res=>res.MapFrom(x=>x.Cars));
         }
     }
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getCar } from 'src/store/actions/car.actions';
-import { selectCurrentViewCar } from 'src/store/selectors/car.selectors';
+import { selectCurrentCarLoading, selectCurrentViewCar } from 'src/store/selectors/car.selectors';
 import { AppState } from 'src/store/types';
 import { ViewCarDTO } from 'src/types/DTOs/CarDTOs/viewCarDTO';
 
@@ -12,13 +12,16 @@ import { ViewCarDTO } from 'src/types/DTOs/CarDTOs/viewCarDTO';
   templateUrl: './view-car.component.html',
   styleUrls: ['./view-car.component.css']
 })
-export class ViewCarComponent implements OnInit {
+export class ViewCarComponent implements OnInit, OnDestroy{
 
   car$: Observable<ViewCarDTO>
   constructor(private store: Store<AppState>,
     private route: ActivatedRoute) {
       this.car$ = this.store.pipe(select(selectCurrentViewCar))
      }
+  ngOnDestroy(): void {
+  // this.store.
+  }
 
   ngOnInit() {   
     const id = Number(this.route.snapshot.paramMap.get('id'));

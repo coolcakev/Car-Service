@@ -7,6 +7,7 @@ import { UpdateCarDTO } from "src/types/DTOs/CarDTOs/updateCarDTO";
 import { ViewCarDTO } from "src/types/DTOs/CarDTOs/viewCarDTO";
 
 
+export const resetCurrentCarViewDTO = createAction('[Car] Reset Current Car View DTO')
 export const resetCarFilter = createAction('[Car] Reset Car Filter')
 export const setCurrentCarDTO = createAction('[Car] Set Current Edit Car DTO', props<{ carDTO: CarDTO }>());
 export const setCarFilteringModel = createAction('[Car] Set Car Filtering Model', props<{ carFiltering: Partial<CarFilteringModel> }>());

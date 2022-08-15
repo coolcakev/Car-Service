@@ -1,11 +1,18 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { select } from '@ngrx/store';
-import { selectCars } from 'src/store/selectors/car.selectors';
+import { selectCars, selectColomnCount } from 'src/store/selectors/car.selectors';
+const countColomnToRowHeight = {};
 let CarGridComponent = class CarGridComponent {
     constructor(store) {
         this.store = store;
+        this.countColomnToRowHeight = {
+            "2": "2:1",
+            "3": "1.2:1",
+            '4': "0.9:1"
+        };
         this.cars$ = this.store.pipe(select(selectCars));
+        this.colomnCount$ = this.store.pipe(select(selectColomnCount));
     }
     ngOnInit() {
     }

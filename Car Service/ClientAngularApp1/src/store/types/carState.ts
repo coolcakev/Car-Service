@@ -6,6 +6,7 @@ import { ViewCarDTO } from "src/types/DTOs/CarDTOs/viewCarDTO";
 export interface CarState {
     loading: boolean;
     currentViewCar: ViewCarDTO;
+    currentViewCarLoading: boolean;
     currentCar: CarDTO;
     carFiltering: CarFilteringModel;
     totalCars: number,

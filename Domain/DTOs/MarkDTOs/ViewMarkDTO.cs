@@ -10,6 +10,7 @@ namespace Domain.DTOs.MarkDTOs
     {
         public string Name { get; set; }
         public List<SelectDTO> Models { get; set; }
+        public List<SelectDTO> Cars { get; set; }
 
     }
 }
