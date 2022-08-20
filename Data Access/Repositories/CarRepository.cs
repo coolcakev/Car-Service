@@ -18,7 +18,7 @@ namespace Data_Access.Repositories
         public Task<(List<Car> entities, int total)> GetCars(CarFilteringModel filteringModel)
         {
             IQueryable<Car> query = _context.Set<Car>().Where(x => x.Name.Contains(filteringModel.SearchTerm)
-                                                    && x.Price.Any(x => x.CreationDate.Date == filteringModel.PriceDate.Date
+                                                    && x.Price.Any(x => x.CreationDate.Date <= filteringModel.PriceDate.Date
                                                                        && x.Value > filteringModel.StartPrice));
             if (filteringModel.EndPrice > 0)
             {
@@ -46,7 +46,7 @@ namespace Data_Access.Repositories
             return GetFilteredWithTotalSumWithQurable(filteringModel, query,
                 x => x.Include(y => y.Mark)
                              .Include(x => x.Model)
-                             .Include(x => x.Price.Where(x => x.CreationDate.Date == filteringModel.PriceDate.Date
+                             .Include(x => x.Price.Where(x => x.CreationDate.Date <= filteringModel.PriceDate.Date
                                                                     && x.Value > filteringModel.StartPrice
                                                                     || (x.Value < filteringModel.EndPrice&& filteringModel.EndPrice > 0))));
         }

@@ -78,15 +78,15 @@ namespace Bisness_Logic.Services
 
         public async Task<IEnumerable<SelectDTO>> GetColors()
         {
-            var cars = await _carRepository.GetAll();
+            var carsColor = (await _carRepository.GetAll(x=>x.Color)).Distinct();
 
             var colors = new List<SelectDTO>();
-            foreach (var car in cars)
+            foreach (var carColor in carsColor)
             {
                 var color = new SelectDTO()
                 {
-                    Id = car.Color,
-                    Name = car.Color
+                    Id = carColor,
+                    Name = carColor
                 };
                 colors.Add(color);
             }
@@ -95,15 +95,15 @@ namespace Bisness_Logic.Services
 
         public async Task<IEnumerable<SelectDTO>> GetEgineCapacities()
         {
-            var cars = await _carRepository.GetAll();
+            var carsEngine = (await _carRepository.GetAll(x=>x.Engine)).Distinct();
 
             var colors = new List<SelectDTO>();
-            foreach (var car in cars)
+            foreach (var carEngine in carsEngine)
             {
                 var color = new SelectDTO()
                 {
-                    Id = car.Engine,
-                    Name = car.Engine
+                    Id = carEngine,
+                    Name = carEngine
                 };
                 colors.Add(color);
             }

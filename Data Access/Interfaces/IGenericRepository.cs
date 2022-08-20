@@ -16,6 +16,7 @@ namespace Data_Access.Interfaces
         Task<(List<T> entities, int total)> GetFilteredWithTotalSum(SortingModel filteringModel, Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
 
+        Task<List<TResult>> GetAll<TResult>(Expression<Func<T, TResult>> selector);
         Task<List<T>> GetAll();
         Task<List<T>> GetAllWithInclude(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
         Task<T> GetById(object id);
