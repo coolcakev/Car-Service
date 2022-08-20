@@ -3,6 +3,11 @@
   }
 
 .mat-tree{
+  display: inline;
   background: none;
   margin-right: 20px;
+}
+.active {
+  background-color: lightskyblue;
+  border-radius:15px;
 }

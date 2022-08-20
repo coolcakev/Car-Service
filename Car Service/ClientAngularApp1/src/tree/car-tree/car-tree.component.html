@@ -1,17 +1,19 @@
-<mat-tree [ngClass]="{'w-25 ':true}" [dataSource]=" carTreeNodes$" [treeControl]="treeControl">
-  <mat-tree-node (click)="NodeClcik($event,node)" *matTreeNodeDef="let node" matTreeNodePadding>
-    <button mat-icon-button disabled></button>
-    {{node.name}}
-  </mat-tree-node>
-  <mat-tree-node  (click)="NodeClcik($event,node)" *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
-    <button mat-icon-button [attr.aria-label]="'Toggle ' + node.name" matTreeNodeToggle>
-      <mat-icon class="mat-icon-rtl-mirror">
-        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-      </mat-icon>
-    </button>
-    {{node.name}}
-    <mat-progress-bar *ngIf="(carTreeNodesLoading$|async)&&(currentCarTreeNode$|async)?.id==node?.id" mode="indeterminate"
-      class="example-tree-progress-bar">
-    </mat-progress-bar>
-  </mat-tree-node>
+<mat-tree class="w-25" [dataSource]=" carTreeNodes$" [treeControl]="treeControl">
+  <ng-container *ngrxLet="currentClickedCarTreeNode$ | async as clickedNode">
+    <mat-tree-node [ngClass]="{'active':clickedNode?.id==node.id&&clickedNode?.level==node.level}" (click)="NodeClcik($event,node)" *matTreeNodeDef="let node" matTreeNodePadding>
+      <button mat-icon-button disabled></button>
+      {{node.name}}
+    </mat-tree-node>
+    <mat-tree-node [ngClass]="{'active':clickedNode?.id==node.id&&clickedNode?.level==node.level}" (click)="NodeClcik($event,node)" *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+      <button mat-icon-button [attr.aria-label]="'Toggle ' + node.name" matTreeNodeToggle>
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      {{node.name}}
+      <mat-progress-bar *ngIf="(carTreeNodesLoading$|async)&&(currentCarTreeNode$|async)?.id==node?.id"
+        mode="indeterminate" class="example-tree-progress-bar">
+      </mat-progress-bar>
+    </mat-tree-node>
+  </ng-container>
 </mat-tree>

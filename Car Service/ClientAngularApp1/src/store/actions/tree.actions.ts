@@ -8,4 +8,5 @@ export const getCarTreesNodesFailure = createAction('[Tree] Get Car Tree Nodes F
 
 export const setCarTreeNodeInfo = createAction('[Tree] Set Car Tree Node Info', props<{ carTreeNodeInfo: CarTreeNodeInfo }>());
 export const setCurrentCarTreeNode = createAction('[Tree] Set Current Car Tree Node', props<{ currentTreeNode: CarTreeNode }>());
+export const setCurrentClickedCarTreeNode = createAction('[Tree] Set Current Clicked Car Tree Node', props<{ clickedTreeNode: CarTreeNode }>());
 export const colapseCarTreeNode = createAction('[Tree] Colapse Car Tree Node', props<{ treeNode: CarTreeNode }>());

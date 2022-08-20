@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { setCarFilteringModel } from 'src/store/actions/car.actions';
 import { getCarTreesNodes, setCarTreeNodeInfo } from 'src/store/actions/tree.actions';
-import { selectCarTreeNodes, selectCarTreeNodesLoading, selectCurrentCarTreeNode } from 'src/store/selectors/tree.selectors';
+import { selectCarTreeNodes, selectCarTreeNodesLoading, selectCurrentCarTreeNode, selectCurrentClickedCarTreeNode } from 'src/store/selectors/tree.selectors';
 import { AppState } from 'src/store/types';
 import { CarTreeNode } from 'src/types/DTOs/TreeDTOs';
 import { CarTreeNodeType } from 'src/types/DTOs/TreeDTOs/CarTreeNodeDTOs/CarTreeNodeType';
@@ -19,6 +19,7 @@ import * as TreeActions from '../../store/actions/tree.actions'
 export class CarTreeComponent implements OnInit, OnDestroy {
 
   currentCarTreeNode$: Observable<CarTreeNode>
+  currentClickedCarTreeNode$: Observable<CarTreeNode>
   carTreeNodesLoading$: Observable<boolean>
   carTreeNodes$: Observable<CarTreeNode[]>
   treeControl: FlatTreeControl<CarTreeNode>;
@@ -36,6 +37,9 @@ export class CarTreeComponent implements OnInit, OnDestroy {
 
     this.currentCarTreeNode$ = this.store.pipe(
       select(selectCurrentCarTreeNode)
+    )
+    this.currentClickedCarTreeNode$ = this.store.pipe(
+      select(selectCurrentClickedCarTreeNode)
     )
 
   }
@@ -92,6 +96,9 @@ export class CarTreeComponent implements OnInit, OnDestroy {
     }))
   }
   NodeClcik(event: Event, node: CarTreeNode) {
+    this.store.dispatch(TreeActions.setCurrentClickedCarTreeNode({
+      clickedTreeNode: node
+    }))
     switch (node.level) {
       case CarTreeNodeType.MarkType:
         this.store.dispatch(setCarFilteringModel({ carFiltering: { modelId:0,markId: node.id } }))

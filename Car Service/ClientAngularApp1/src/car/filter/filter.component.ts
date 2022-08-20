@@ -8,6 +8,7 @@ import { delay } from 'src/utility/delay';
 import { Options, ChangeContext } from "@angular-slider/ngx-slider";
 import { SelectDTO } from 'src/types/DTOs';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { setCurrentClickedCarTreeNode } from 'src/store/actions/tree.actions';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -88,6 +89,9 @@ export class FilterComponent implements OnInit {
   }
 
   hendleGetCarsAllMarks(event: Event) {
+    this.store.dispatch(setCurrentClickedCarTreeNode({
+      clickedTreeNode: null
+    }))
     this.store.dispatch(CarAction.setCarFilteringModel({ carFiltering: { markId: 0,modelId:0 } }))
   }
 }

@@ -4,6 +4,7 @@ import { CarTreeNodeType } from "src/types/DTOs/TreeDTOs/CarTreeNodeDTOs/CarTree
 import { TreeNode } from "src/types/DTOs/TreeDTOs/TreeNode";
 
 export interface TreeState {
+    currentClickedCarTreeNode:CarTreeNode,
     currentCarTreeNode:CarTreeNode,
     carTreeNodes: CarTreeNode[],
     carTreeNodeInfo: CarTreeNodeInfo,

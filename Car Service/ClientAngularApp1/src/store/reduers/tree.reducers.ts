@@ -12,6 +12,7 @@ const resetTreeNodeInfo = (): CarTreeNodeInfo => ({
 })
 
 export const initialState: TreeState = {
+    currentClickedCarTreeNode:null,
     currentCarTreeNode: null,
     carTreeNodes: [],
     carTreeNodesLoading: false,
@@ -25,7 +26,7 @@ const getCarTreeNodes = (state: TreeState, nodes: CarTreeNode[]): CarTreeNode[] 
     if (currentCarTreeNode == null) {
         return nodes
     }
-    const index = carTreeNodes.findIndex(x => x.id == currentCarTreeNode.id);
+    const index = carTreeNodes.findIndex(x => x.id == currentCarTreeNode.id&&(x.level==currentCarTreeNode.level));
 
     if (index < 0 || !nodes) {
         return state.carTreeNodes
@@ -36,7 +37,7 @@ const getCarTreeNodes = (state: TreeState, nodes: CarTreeNode[]): CarTreeNode[] 
 }
 const colapseCarTreeNode = (state: TreeState, node: CarTreeNode): CarTreeNode[] => {
     const { carTreeNodes, currentCarTreeNode } = state
-    const index = carTreeNodes.findIndex(x => x.id == node.id);
+    const index = carTreeNodes.findIndex(x => x.id == node.id&&(x.level==node.level));
 
     if (!node || index < 0) {
         return carTreeNodes
@@ -57,6 +58,7 @@ export const treeReducer = createReducer(
     initialState,
     on(TreeAction.setCarTreeNodeInfo, (state, action) => ({ ...state, carTreeNodeInfo: { ...state.carTreeNodeInfo, ...action.carTreeNodeInfo, } })),
     on(TreeAction.setCurrentCarTreeNode, (state, action) => ({ ...state, currentCarTreeNode: action.currentTreeNode })),
+    on(TreeAction.setCurrentClickedCarTreeNode, (state, action) => ({ ...state, currentClickedCarTreeNode: action.clickedTreeNode })),
     on(TreeAction.colapseCarTreeNode, (state, action) => ({ ...state, carTreeNodes: colapseCarTreeNode(state, action.treeNode) })),
 
     on(TreeAction.getCarTreesNodes, state => ({ ...state, carTreeNodesLoading: true, error: null })),

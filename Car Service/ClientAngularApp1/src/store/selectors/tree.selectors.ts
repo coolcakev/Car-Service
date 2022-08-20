@@ -20,3 +20,7 @@ export const selectCurrentCarTreeNode=createSelector(
     selectTreeFeature,
     (state:TreeState) =>state.currentCarTreeNode
 )
+export const selectCurrentClickedCarTreeNode=createSelector(
+    selectTreeFeature,
+    (state:TreeState) =>state.currentClickedCarTreeNode
+)
