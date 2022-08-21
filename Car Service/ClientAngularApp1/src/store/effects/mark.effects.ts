@@ -22,7 +22,7 @@ export class MarkEffects {
                         this.markService.getMarks(markFilter).pipe(
                             map(dtoWithTotal => MarkAction.getMarksSuccess({ dtoWithTotal })),
                             catchError((error: HttpErrorResponse) =>
-                                of(MarkAction.getMarksFailure({ error: error?.message }))
+                                of(MarkAction.getMarksFailure({ error:  error.error }))
                             )
                         )
                     )
@@ -37,7 +37,7 @@ export class MarkEffects {
                 this.markService.getMarkForSelect().pipe(
                     map(selectDTOs => MarkAction.getMarksForSelectSuccess({ selectDTOs })),
                     catchError((error: HttpErrorResponse) =>
-                        of(MarkAction.getMarksForSelectFailure({ error: error?.message }))
+                        of(MarkAction.getMarksForSelectFailure({ error:  error.error }))
                     )
                 )
             ),
@@ -51,7 +51,7 @@ export class MarkEffects {
                 this.markService.createMark(mark).pipe(
                     map(marks => MarkAction.createMarkSuccess()),
                     map(marks => MarkAction.getMarks()),
-                    catchError((error: HttpErrorResponse) => of(MarkAction.createMarkFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(MarkAction.createMarkFailure({ error:  error.error }))))
             ),
         );
     });
@@ -74,7 +74,7 @@ export class MarkEffects {
                         this.markService.updateMark(mark).pipe(
                             map(marks => MarkAction.updateMarkSuccess()),
                             map(marks => MarkAction.getMarks()),
-                            catchError((error: HttpErrorResponse) => of(MarkAction.updateMarkFailure({ error: error.message }))))
+                            catchError((error: HttpErrorResponse) => of(MarkAction.updateMarkFailure({ error:  error.error }))))
                     ),
                 )
             )
@@ -90,7 +90,7 @@ export class MarkEffects {
                 this.markService.deleteMark(markId).pipe(
                     map(marks => MarkAction.deleteMarkSuccess()),
                     map(marks => MarkAction.getMarks()),
-                    catchError((error: HttpErrorResponse) => of(MarkAction.deleteMarkFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(MarkAction.deleteMarkFailure({ error:  error.error }))))
             ),
         );
     });
@@ -102,7 +102,7 @@ export class MarkEffects {
             mergeMap((markId) =>
                 this.markService.getMark(markId).pipe(
                     map(mark => MarkAction.getMarkSuccess({ mark })),
-                    catchError((error: HttpErrorResponse) => of(MarkAction.getMarkFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(MarkAction.getMarkFailure({ error:  error.error }))))
             ),
         );
     });

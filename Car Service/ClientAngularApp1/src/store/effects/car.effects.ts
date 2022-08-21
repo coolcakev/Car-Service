@@ -38,7 +38,7 @@ export class CarEffects {
                         this.carService.getCars(carFilter).pipe(
                             map(dtoWithTotal => CarAction.getCarsSuccess({ dtoWithTotal })),
                             catchError((error: HttpErrorResponse) =>
-                                of(CarAction.getCarsFailure({ error: error?.message }))
+                                of(CarAction.getCarsFailure({ error: error.error }))
                             )
                         )
                     )
@@ -60,7 +60,7 @@ export class CarEffects {
                         CarAction.getMaxPrice(),
 
                     )),
-                    catchError((error: HttpErrorResponse) => of(CarAction.createCarFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(CarAction.createCarFailure({ error:  error.error }))))
             ),
         );
     });
@@ -90,7 +90,7 @@ export class CarEffects {
                             )
 
                             ),
-                            catchError((error: HttpErrorResponse) => of(CarAction.updateCarFailure({ error: error.message }))))
+                            catchError((error: HttpErrorResponse) => of(CarAction.updateCarFailure({ error:  error.error }))))
                     ),
                 )
             )
@@ -105,7 +105,7 @@ export class CarEffects {
                 this.carService.deleteCar(carId).pipe(
                     map(cars => CarAction.deleteCarSuccess()),
                     map(cars => CarAction.getCars()),
-                    catchError((error: HttpErrorResponse) => of(CarAction.deleteCarFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(CarAction.deleteCarFailure({ error:  error.error}))))
             ),
         );
     });
@@ -117,7 +117,7 @@ export class CarEffects {
             mergeMap((carId) =>
                 this.carService.getCar(carId).pipe(
                     map(car => CarAction.getCarSuccess({ car })),
-                    catchError((error: HttpErrorResponse) => of(CarAction.getCarFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(CarAction.getCarFailure({ error:  error.error }))))
             ),
         );
     });
@@ -139,7 +139,7 @@ export class CarEffects {
             mergeMap(() =>
                 this.carService.getColors().pipe(
                     map(colors => CarAction.getCarColorsSuccess({ colors })),
-                    catchError((error: HttpErrorResponse) => of(CarAction.getCarFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(CarAction.getCarFailure({ error:  error.error }))))
             ),
         );
     });
@@ -150,7 +150,7 @@ export class CarEffects {
             mergeMap(() =>
                 this.carService.getEngineCapacities().pipe(
                     map(engineCapacities => CarAction.getCarEngineSuccess({ engineCapacities })),
-                    catchError((error: HttpErrorResponse) => of(CarAction.getCarFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(CarAction.getCarFailure({ error: error.error }))))
             ),
         );
     });
@@ -161,7 +161,7 @@ export class CarEffects {
             mergeMap(() =>
                 this.priceService.getMaxPrice().pipe(
                     map(maxPrice => CarAction.getMaxPriceSuccess({ maxPrice })),
-                    catchError((error: HttpErrorResponse) => of(CarAction.getCarFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(CarAction.getCarFailure({ error:  error.error }))))
             ),
         );
     });

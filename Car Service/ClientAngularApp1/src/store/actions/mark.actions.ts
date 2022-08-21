@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store"
+import { HttError } from "src/error/resources/models/httError";
 import { DTOWithTotal, SelectDTO } from "src/types/DTOs";
 import { CreateMarkDTO } from "src/types/DTOs/markDTOs/createMarkDTO";
 import { MarkDTO } from "src/types/DTOs/markDTOs/markDTO";
@@ -12,24 +13,24 @@ export const setMarkFilteringModel = createAction('[Mark] Set Mark Filtering Mod
 
 export const getMarksForSelect = createAction('[Mark] Get Marks For Select');
 export const getMarksForSelectSuccess = createAction('[Mark] Get Marks For Select Success', props<{ selectDTOs: SelectDTO[] }>());
-export const getMarksForSelectFailure = createAction('[Mark] Get Marks For Select Failure', props<{ error: string }>());
+export const getMarksForSelectFailure = createAction('[Mark] Get Marks For Select Failure', props<{ error: HttError }>());
 
 export const getMarks = createAction('[Mark] Get Marks');
 export const getMarksSuccess = createAction('[Mark] Get Marks Success', props<{ dtoWithTotal: DTOWithTotal<MarkDTO> }>());
-export const getMarksFailure = createAction('[Mark] Get Marks Failure', props<{ error: string }>());
+export const getMarksFailure = createAction('[Mark] Get Marks Failure', props<{ error: HttError }>());
 
 export const getMark = createAction('[Mark] Get Mark',props<{id:number}>());
 export const getMarkSuccess = createAction('[Mark] Get Mark Success', props<{ mark: ViewMarkDTO }>());
-export const getMarkFailure = createAction('[Mark] Get Mark Failure', props<{ error: string }>());
+export const getMarkFailure = createAction('[Mark] Get Mark Failure', props<{ error: HttError }>());
 
 export const createMark = createAction('[Mark] Create Mark',props<{mark:CreateMarkDTO}>());
 export const createMarkSuccess = createAction('[Mark] Create Mark Success');
-export const createMarkFailure = createAction('[Mark] Create Mark Failure', props<{ error: string }>());
+export const createMarkFailure = createAction('[Mark] Create Mark Failure', props<{ error: HttError }>());
 
 export const updateMark = createAction('[Mark] Update Mark',props<{mark:UpdateMarkDTO}>());
 export const updateMarkSuccess = createAction('[Mark] Update Mark Success');
-export const updateMarkFailure = createAction('[Mark] Update Mark Failure', props<{ error: string }>());
+export const updateMarkFailure = createAction('[Mark] Update Mark Failure', props<{ error: HttError }>());
 
 export const deleteMark = createAction('[Mark] Delete Mark',props<{id:number}>());
 export const deleteMarkSuccess = createAction('[Mark] Delete Mark Success');
-export const deleteMarkFailure = createAction('[Mark] Delete Mark Failure', props<{ error: string }>());
+export const deleteMarkFailure = createAction('[Mark] Delete Mark Failure', props<{ error: HttError }>());

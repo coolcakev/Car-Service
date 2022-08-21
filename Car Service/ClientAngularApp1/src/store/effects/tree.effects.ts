@@ -22,7 +22,7 @@ export class TreeEffects {
                         return this.treeService.getCarTreeNode(carTreeNodeInfo).pipe(
                             map(carTreeNodes => TreeAction.getCarTreesNodesSuccess({ carTreeNodes })),
                             catchError((error: HttpErrorResponse) =>
-                                of(TreeAction.getCarTreesNodesFailure({ error: error?.message }))
+                                of(TreeAction.getCarTreesNodesFailure({ error: error.error }))
                             )
                         )
                     })

@@ -61,13 +61,10 @@ export const carReducer = createReducer(
     on(CarAction.getCarFailure, (state, action) => ({ ...state, error: action.error })),
 
     on(CarAction.createCar, state => ({ ...state, error: null })),
-    on(CarAction.createCarSuccess, state => ({ ...state, error: null, currentCar: null })),
-    on(CarAction.createCarFailure, (state, action) => ({ ...state, error: action.error })),
+    on(CarAction.createCarSuccess, state => ({ ...state, error: null, currentCar: null })),   
 
     on(CarAction.updateCar, state => ({ ...state, error: null })),
     on(CarAction.updateCarSuccess, state => ({ ...state, error: null, currentCar: null })),
-    on(CarAction.updateCarFailure, (state, action) => ({ ...state, error: action.error })),
 
     on(CarAction.deleteCar, state => ({ ...state, error: null })),
-    on(CarAction.deleteCarFailure, (state, action) => ({ ...state, error: action.error })),
 );

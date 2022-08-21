@@ -12,12 +12,12 @@ const resetTreeNodeInfo = (): CarTreeNodeInfo => ({
 })
 
 export const initialState: TreeState = {
-    currentClickedCarTreeNode:null,
+    currentClickedCarTreeNode: null,
     currentCarTreeNode: null,
     carTreeNodes: [],
     carTreeNodesLoading: false,
     carTreeNodeInfo: resetTreeNodeInfo(),
-    error: ""
+    error: null
 }
 
 const getCarTreeNodes = (state: TreeState, nodes: CarTreeNode[]): CarTreeNode[] => {
@@ -26,7 +26,7 @@ const getCarTreeNodes = (state: TreeState, nodes: CarTreeNode[]): CarTreeNode[] 
     if (currentCarTreeNode == null) {
         return nodes
     }
-    const index = carTreeNodes.findIndex(x => x.id == currentCarTreeNode.id&&(x.level==currentCarTreeNode.level));
+    const index = carTreeNodes.findIndex(x => x.id == currentCarTreeNode.id && (x.level == currentCarTreeNode.level));
 
     if (index < 0 || !nodes) {
         return state.carTreeNodes
@@ -37,7 +37,7 @@ const getCarTreeNodes = (state: TreeState, nodes: CarTreeNode[]): CarTreeNode[] 
 }
 const colapseCarTreeNode = (state: TreeState, node: CarTreeNode): CarTreeNode[] => {
     const { carTreeNodes, currentCarTreeNode } = state
-    const index = carTreeNodes.findIndex(x => x.id == node.id&&(x.level==node.level));
+    const index = carTreeNodes.findIndex(x => x.id == node.id && (x.level == node.level));
 
     if (!node || index < 0) {
         return carTreeNodes

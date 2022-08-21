@@ -1,3 +1,4 @@
+import { HttError } from "src/error/resources/models/httError";
 import { SelectDTO } from "src/types/DTOs";
 import { CreateMarkDTO } from "src/types/DTOs/markDTOs/createMarkDTO";
 import { MarkDTO } from "src/types/DTOs/markDTOs/markDTO";
@@ -13,7 +14,7 @@ export interface MarkState {
     markFiltering: MarkFilteringModel;
     totalMarks: number,
     marks: MarkDTO[];
-    error: string;
+    error: HttError;
     loadingForMarkSelect:boolean;
     marksForSelect:SelectDTO[]
 }

@@ -1,3 +1,4 @@
+import { HttError } from "src/error/resources/models/httError";
 import { SelectDTO } from "src/types/DTOs";
 import { CarDTO } from "src/types/DTOs/CarDTOs/CarDTO";
 import { CarFilteringModel } from "src/types/DTOs/CarDTOs/carFilteringModel";
@@ -11,7 +12,7 @@ export interface CarState {
     carFiltering: CarFilteringModel;
     totalCars: number,
     cars: CarDTO[];
-    error: string;
+    error: HttError;
     colors:SelectDTO[],
     engine:SelectDTO[],
     maxPrice: number,

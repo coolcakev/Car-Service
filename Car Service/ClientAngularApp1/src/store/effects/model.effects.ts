@@ -22,7 +22,7 @@ export class ModelEffects {
                         this.modelService.getModels(modelFilter).pipe(
                             map(dtoWithTotal => ModelAction.getModelsSuccess({ dtoWithTotal })),
                             catchError((error: HttpErrorResponse) =>
-                                of(ModelAction.getModelsFailure({ error: error?.message }))
+                                of(ModelAction.getModelsFailure({ error:  error.error }))
                             )
                         )
                     )
@@ -38,7 +38,7 @@ export class ModelEffects {
                 this.modelService.createModel(model).pipe(
                     map(models => ModelAction.createModelSuccess()),
                     map(models => ModelAction.getModels()),
-                    catchError((error: HttpErrorResponse) => of(ModelAction.createModelFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(ModelAction.createModelFailure({ error:  error.error }))))
             ),
         );
     });
@@ -61,7 +61,7 @@ export class ModelEffects {
                         this.modelService.updateModel(model).pipe(
                             map(models => ModelAction.updateModelSuccess()),
                             map(models => ModelAction.getModels()),
-                            catchError((error: HttpErrorResponse) => of(ModelAction.updateModelFailure({ error: error.message }))))
+                            catchError((error: HttpErrorResponse) => of(ModelAction.updateModelFailure({ error: error.error }))))
                     ),
                 )
             )
@@ -77,7 +77,7 @@ export class ModelEffects {
                 this.modelService.deleteModel(modelId).pipe(
                     map(models => ModelAction.deleteModelSuccess()),
                     map(models => ModelAction.getModels()),
-                    catchError((error: HttpErrorResponse) => of(ModelAction.deleteModelFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(ModelAction.deleteModelFailure({ error:  error.error }))))
             ),
         );
     });
@@ -89,7 +89,7 @@ export class ModelEffects {
             mergeMap((modelId) =>
                 this.modelService.getModel(modelId).pipe(
                     map(model => ModelAction.getModelSuccess({model})),                  
-                    catchError((error: HttpErrorResponse) => of(ModelAction.getModelFailure({ error: error.message }))))
+                    catchError((error: HttpErrorResponse) => of(ModelAction.getModelFailure({ error:  error.error }))))
             ),
         );
     });
@@ -102,7 +102,7 @@ export class ModelEffects {
             this.modelService.getModelForSelect(markId).pipe(
                 map(selectDTOs => ModelAction.getModelsForSelectSuccess({ selectDTOs })),
                 catchError((error: HttpErrorResponse) =>
-                    of(ModelAction.getModelsForSelectFailure({ error: error?.message }))
+                    of(ModelAction.getModelsForSelectFailure({ error: error.error }))
                 )
             )
         ),

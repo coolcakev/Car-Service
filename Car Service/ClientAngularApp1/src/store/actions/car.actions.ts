@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { HttError } from "src/error/resources/models/httError";
 import { DTOWithTotal, SelectDTO } from "src/types/DTOs";
 import { CarDTO } from "src/types/DTOs/CarDTOs/CarDTO";
 import { CarFilteringModel } from "src/types/DTOs/CarDTOs/carFilteringModel";
@@ -25,20 +26,20 @@ export const getCarEngineSuccess = createAction('[Car] Get Car Engine Capacity S
 
 export const getCars = createAction('[Car] Get Cars');
 export const getCarsSuccess = createAction('[Car] Get Cars Success', props<{ dtoWithTotal: DTOWithTotal<CarDTO> }>());
-export const getCarsFailure = createAction('[Car] Get Cars Failure', props<{ error: string }>());
+export const getCarsFailure = createAction('[Car] Get Cars Failure', props<{ error: HttError }>());
 
 export const getCar = createAction('[Car] Get Car', props<{ id: number }>());
 export const getCarSuccess = createAction('[Car] Get Car Success', props<{ car: ViewCarDTO }>());
-export const getCarFailure = createAction('[Car] Get Car Failure', props<{ error: string }>());
+export const getCarFailure = createAction('[Car] Get Car Failure', props<{ error: HttError }>());
 
 export const createCar = createAction('[Car] Create Car', props<{ car: CreateCarDTO }>());
 export const createCarSuccess = createAction('[Car] Create Car Success');
-export const createCarFailure = createAction('[Car] Create Car Failure', props<{ error: string }>());
+export const createCarFailure = createAction('[Car] Create Car Failure', props<{ error: HttError }>());
 
 export const updateCar = createAction('[Car] Update Car', props<{ car: UpdateCarDTO }>());
 export const updateCarSuccess = createAction('[Car] Update Car Success');
-export const updateCarFailure = createAction('[Car] Update Car Failure', props<{ error: string }>());
+export const updateCarFailure = createAction('[Car] Update Car Failure', props<{ error: HttError }>());
 
 export const deleteCar = createAction('[Car] Delete Car', props<{ id: number }>());
 export const deleteCarSuccess = createAction('[Car] Delete Car Success');
-export const deleteCarFailure = createAction('[Car] Delete Car Failure', props<{ error: string }>());
+export const deleteCarFailure = createAction('[Car] Delete Car Failure', props<{ error: HttError }>());
