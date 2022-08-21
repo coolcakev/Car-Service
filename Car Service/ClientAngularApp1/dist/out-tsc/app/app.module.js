@@ -13,6 +13,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { reducers } from 'src/store/index';
+import { AlertModule } from 'src/alert/alert.module';
+import { ErrorModule } from 'src/error/error.module';
+import { AlertEffects } from 'src/store/effects/alert.effects';
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -27,10 +30,19 @@ AppModule = __decorate([
             HttpClientModule,
             MarkModule,
             CarModule,
-            StoreModule.forRoot(reducers, {}),
+            StoreModule.forRoot(reducers, {
+                runtimeChecks: {
+                    strictStateImmutability: true,
+                    strictActionImmutability: true,
+                    strictActionWithinNgZone: true,
+                    strictActionTypeUniqueness: true,
+                }
+            }),
             StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-            EffectsModule.forRoot([]),
+            EffectsModule.forRoot([AlertEffects]),
             BrowserAnimationsModule,
+            AlertModule,
+            ErrorModule
         ],
         exports: [],
         providers: [],

@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
-import { catchError, map, mergeMap, of, take, tap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap, take, tap } from 'rxjs';
 import { MarkService } from 'src/services/mark.service';
 import * as MarkAction from "../actions/mark.actions"
 import { selectCurrentMark, selectMarkFiltering } from '../selectors/mark.selectors';
@@ -49,8 +49,10 @@ export class MarkEffects {
             map((mark) => mark.mark),
             mergeMap((mark) =>
                 this.markService.createMark(mark).pipe(
-                    map(marks => MarkAction.createMarkSuccess()),
-                    map(marks => MarkAction.getMarks()),
+                    switchMap(()=>of(
+                        MarkAction.createMarkSuccess(),
+                        MarkAction.getMarks()
+                    )),                   
                     catchError((error: HttpErrorResponse) => of(MarkAction.createMarkFailure({ error:  error.error }))))
             ),
         );
@@ -72,8 +74,11 @@ export class MarkEffects {
                     }),
                     mergeMap((mark) =>
                         this.markService.updateMark(mark).pipe(
-                            map(marks => MarkAction.updateMarkSuccess()),
-                            map(marks => MarkAction.getMarks()),
+                            switchMap(()=>of(
+                                MarkAction.updateMarkSuccess(),
+                                MarkAction.getMarks()
+                            )),
+                           
                             catchError((error: HttpErrorResponse) => of(MarkAction.updateMarkFailure({ error:  error.error }))))
                     ),
                 )
@@ -88,8 +93,10 @@ export class MarkEffects {
             map((action) => action.id),
             mergeMap((markId) =>
                 this.markService.deleteMark(markId).pipe(
-                    map(marks => MarkAction.deleteMarkSuccess()),
-                    map(marks => MarkAction.getMarks()),
+                    switchMap(()=>of(
+                        MarkAction.deleteMarkSuccess(),
+                        MarkAction.getMarks()
+                    )),                  
                     catchError((error: HttpErrorResponse) => of(MarkAction.deleteMarkFailure({ error:  error.error }))))
             ),
         );

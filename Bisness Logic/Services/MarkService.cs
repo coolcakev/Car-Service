@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bisness_Logic.Interfaces;
+using Car_Service.Models.ErrorModels;
 using Data_Access;
 using Data_Access.Interfaces;
 using Domain.DTOs;
@@ -41,6 +42,17 @@ namespace Bisness_Logic.Services
                                                                             .Include(x => x.Cars)
                                                                                 .ThenInclude(x=>x.Price)
                                                                             )) as Mark;
+            var errorMessage = "";
+            if (mark.Models.Count > 0)
+            {
+                errorMessage = "You cant delete mark because this mark have models";
+                if (mark.Cars.Count > 0) {
+                    errorMessage += " and cars";
+                }
+                throw new DeleteExeption(errorMessage);
+            }
+
+
             if (mark == null)
             {
                 return false;

@@ -2,7 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
-import { catchError, map, mergeMap, of, take } from "rxjs";
+import { catchError, map, mergeMap, of, switchMap, take } from "rxjs";
 import { ModelService } from "src/services/model.services";
 import * as ModelAction from "../actions/model.actions"
 import { selectCurrentModel, selectModelFiltering } from "../selectors/model.selectors";
@@ -36,8 +36,11 @@ export class ModelEffects {
             map((model) => model.model),
             mergeMap((model) =>
                 this.modelService.createModel(model).pipe(
-                    map(models => ModelAction.createModelSuccess()),
-                    map(models => ModelAction.getModels()),
+                    switchMap(()=>of(
+                        ModelAction.createModelSuccess(),
+                        ModelAction.getModels()
+                    )),            
+                
                     catchError((error: HttpErrorResponse) => of(ModelAction.createModelFailure({ error:  error.error }))))
             ),
         );
@@ -59,8 +62,11 @@ export class ModelEffects {
                     }),
                     mergeMap((model) =>
                         this.modelService.updateModel(model).pipe(
-                            map(models => ModelAction.updateModelSuccess()),
-                            map(models => ModelAction.getModels()),
+                            switchMap(()=>of(
+                                ModelAction.updateModelSuccess(),
+                                ModelAction.getModels()
+                            )),
+                        
                             catchError((error: HttpErrorResponse) => of(ModelAction.updateModelFailure({ error: error.error }))))
                     ),
                 )
@@ -75,8 +81,11 @@ export class ModelEffects {
             map((action) => action.id),
             mergeMap((modelId) =>
                 this.modelService.deleteModel(modelId).pipe(
-                    map(models => ModelAction.deleteModelSuccess()),
-                    map(models => ModelAction.getModels()),
+                    switchMap(()=>of(
+                        ModelAction.deleteModelSuccess(),
+                        ModelAction.getModels()
+                    )),              
+                 
                     catchError((error: HttpErrorResponse) => of(ModelAction.deleteModelFailure({ error:  error.error }))))
             ),
         );

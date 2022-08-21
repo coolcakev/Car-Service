@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 namespace Data_Access
 {
     public class ApplicationContext : DbContext
-    {     
+    {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-            //Database.EnsureDeleted();           
+            //Database.EnsureDeleted();
         }
-        public void CreateDataBase() {
+        public void CreateDataBase()
+        {
             Database.EnsureCreated();
         }
 
@@ -26,6 +27,16 @@ namespace Data_Access
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Mark>()
+                .HasIndex(u => u.Name)
+                .IsUnique();
+            modelBuilder.Entity<Model>()
+               .HasIndex(u => u.Name)
+               .IsUnique();
+            modelBuilder.Entity<Car>()
+               .HasIndex(u => u.Name)
+               .IsUnique();
+            
+            modelBuilder.Entity<Mark>()
                 .HasMany(p => p.Models)
                 .WithOne(x => x.Mark)
                 .OnDelete(DeleteBehavior.ClientCascade);
@@ -34,7 +45,7 @@ namespace Data_Access
                 .HasMany(p => p.Cars)
                 .WithOne(x => x.Mark)
                 .OnDelete(DeleteBehavior.ClientCascade);
-       
+
 
             modelBuilder.Entity<Model>()
                  .HasMany(p => p.Cars)
@@ -44,7 +55,7 @@ namespace Data_Access
             modelBuilder.Entity<Car>()
                 .HasMany(p => p.Price)
                 .WithOne(x => x.Car)
-                .OnDelete(DeleteBehavior.ClientCascade);            
+                .OnDelete(DeleteBehavior.ClientCascade);
 
         }
 

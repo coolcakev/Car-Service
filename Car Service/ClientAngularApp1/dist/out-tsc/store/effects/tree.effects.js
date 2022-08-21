@@ -12,7 +12,7 @@ let TreeEffects = class TreeEffects {
         this.treeService = treeService;
         this.getCarTreesNodes$ = createEffect(() => {
             return this.actions$.pipe(ofType(TreeAction.getCarTreesNodes), mergeMap(() => this.store.pipe(select(selectCarTreeNodeInfo), take(1), mergeMap((carTreeNodeInfo) => {
-                return this.treeService.getCarTreeNode(carTreeNodeInfo).pipe(map(carTreeNodes => TreeAction.getCarTreesNodesSuccess({ carTreeNodes })), catchError((error) => of(TreeAction.getCarTreesNodesFailure({ error: error?.message }))));
+                return this.treeService.getCarTreeNode(carTreeNodeInfo).pipe(map(carTreeNodes => TreeAction.getCarTreesNodesSuccess({ carTreeNodes })), catchError((error) => of(TreeAction.getCarTreesNodesFailure({ error: error.error }))));
             }))));
         });
         this.setCarTreeNodeInfo$ = createEffect(() => {

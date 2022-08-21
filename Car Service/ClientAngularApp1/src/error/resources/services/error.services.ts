@@ -7,8 +7,8 @@ import { HttError } from "../models/httError"
 export class ErrorService {
 
   getErrorMessage(error: HttError, message: string) {
-    if (error !== null&&error.detail!== undefined) {
-      return error.detail
+    if (error !== null&&error.message!== undefined) {
+      return error.message.substring(0,200)
     }
     return message
   }

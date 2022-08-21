@@ -1,0 +1,1 @@
+{"version":3,"file":"error.module.js","sourceRoot":"","sources":["../../../src/error/error.module.ts"],"names":[],"mappings":";AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,iBAAiB,CAAC;AAC/C,OAAO,EAAE,QAAQ,EAAE,MAAM,eAAe,CAAC;AAQzC,IAAa,WAAW,GAAxB,MAAa,WAAW;CAAI,CAAA;AAAf,WAAW;IALvB,QAAQ,CAAC;QACR,OAAO,EAAE;YACP,YAAY;SACb;KACF,CAAC;GACW,WAAW,CAAI;SAAf,WAAW"}

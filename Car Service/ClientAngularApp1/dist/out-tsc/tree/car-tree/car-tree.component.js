@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { select } from '@ngrx/store';
 import { setCarFilteringModel } from 'src/store/actions/car.actions';
 import { getCarTreesNodes } from 'src/store/actions/tree.actions';
-import { selectCarTreeNodes, selectCarTreeNodesLoading, selectCurrentCarTreeNode } from 'src/store/selectors/tree.selectors';
+import { selectCarTreeNodes, selectCarTreeNodesLoading, selectCurrentCarTreeNode, selectCurrentClickedCarTreeNode } from 'src/store/selectors/tree.selectors';
 import { CarTreeNodeType } from 'src/types/DTOs/TreeDTOs/CarTreeNodeDTOs/CarTreeNodeType';
 import * as TreeActions from '../../store/actions/tree.actions';
 let CarTreeComponent = class CarTreeComponent {
@@ -17,6 +17,7 @@ let CarTreeComponent = class CarTreeComponent {
         this.carTreeNodes$ = this.store.pipe(select(selectCarTreeNodes));
         this.carTreeNodesLoading$ = this.store.pipe(select(selectCarTreeNodesLoading));
         this.currentCarTreeNode$ = this.store.pipe(select(selectCurrentCarTreeNode));
+        this.currentClickedCarTreeNode$ = this.store.pipe(select(selectCurrentClickedCarTreeNode));
     }
     ngOnDestroy() {
         this.treeControl.expansionModel.changed.unsubscribe();
@@ -58,6 +59,9 @@ let CarTreeComponent = class CarTreeComponent {
         }));
     }
     NodeClcik(event, node) {
+        this.store.dispatch(TreeActions.setCurrentClickedCarTreeNode({
+            clickedTreeNode: node
+        }));
         switch (node.level) {
             case CarTreeNodeType.MarkType:
                 this.store.dispatch(setCarFilteringModel({ carFiltering: { modelId: 0, markId: node.id } }));

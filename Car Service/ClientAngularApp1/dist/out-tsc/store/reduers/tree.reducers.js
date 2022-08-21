@@ -7,18 +7,19 @@ const resetTreeNodeInfo = () => ({
     markId: -1,
 });
 export const initialState = {
+    currentClickedCarTreeNode: null,
     currentCarTreeNode: null,
     carTreeNodes: [],
     carTreeNodesLoading: false,
     carTreeNodeInfo: resetTreeNodeInfo(),
-    error: ""
+    error: null
 };
 const getCarTreeNodes = (state, nodes) => {
     const { carTreeNodes, currentCarTreeNode } = state;
     if (currentCarTreeNode == null) {
         return nodes;
     }
-    const index = carTreeNodes.findIndex(x => x.id == currentCarTreeNode.id);
+    const index = carTreeNodes.findIndex(x => x.id == currentCarTreeNode.id && (x.level == currentCarTreeNode.level));
     if (index < 0 || !nodes) {
         return state.carTreeNodes;
     }
@@ -28,7 +29,7 @@ const getCarTreeNodes = (state, nodes) => {
 };
 const colapseCarTreeNode = (state, node) => {
     const { carTreeNodes, currentCarTreeNode } = state;
-    const index = carTreeNodes.findIndex(x => x.id == node.id);
+    const index = carTreeNodes.findIndex(x => x.id == node.id && (x.level == node.level));
     if (!node || index < 0) {
         return carTreeNodes;
     }
@@ -38,5 +39,5 @@ const colapseCarTreeNode = (state, node) => {
     newCarTreeNodes.splice(index + 1, count);
     return newCarTreeNodes;
 };
-export const treeReducer = createReducer(initialState, on(TreeAction.setCarTreeNodeInfo, (state, action) => ({ ...state, carTreeNodeInfo: { ...state.carTreeNodeInfo, ...action.carTreeNodeInfo, } })), on(TreeAction.setCurrentCarTreeNode, (state, action) => ({ ...state, currentCarTreeNode: action.currentTreeNode })), on(TreeAction.colapseCarTreeNode, (state, action) => ({ ...state, carTreeNodes: colapseCarTreeNode(state, action.treeNode) })), on(TreeAction.getCarTreesNodes, state => ({ ...state, carTreeNodesLoading: true, error: null })), on(TreeAction.getCarTreesNodesSuccess, (state, action) => ({ ...state, carTreeNodesLoading: false, carTreeNodes: getCarTreeNodes(state, action.carTreeNodes) })), on(TreeAction.getCarTreesNodesFailure, (state, action) => ({ ...state, carTreeNodesLoading: false, error: action.error })));
+export const treeReducer = createReducer(initialState, on(TreeAction.setCarTreeNodeInfo, (state, action) => ({ ...state, carTreeNodeInfo: { ...state.carTreeNodeInfo, ...action.carTreeNodeInfo, } })), on(TreeAction.setCurrentCarTreeNode, (state, action) => ({ ...state, currentCarTreeNode: action.currentTreeNode })), on(TreeAction.setCurrentClickedCarTreeNode, (state, action) => ({ ...state, currentClickedCarTreeNode: action.clickedTreeNode })), on(TreeAction.colapseCarTreeNode, (state, action) => ({ ...state, carTreeNodes: colapseCarTreeNode(state, action.treeNode) })), on(TreeAction.getCarTreesNodes, state => ({ ...state, carTreeNodesLoading: true, error: null })), on(TreeAction.getCarTreesNodesSuccess, (state, action) => ({ ...state, carTreeNodesLoading: false, carTreeNodes: getCarTreeNodes(state, action.carTreeNodes) })), on(TreeAction.getCarTreesNodesFailure, (state, action) => ({ ...state, carTreeNodesLoading: false, error: action.error })));
 //# sourceMappingURL=tree.reducers.js.map

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bisness_Logic.Interfaces;
+using Car_Service.Models.ErrorModels;
 using Data_Access;
 using Data_Access.Interfaces;
 using Domain.DTOs;
@@ -32,15 +33,20 @@ namespace Bisness_Logic.Services
             var model = _mapper.Map<Model>(modelDTO);
             await _modelRepository.Insert(model);
             await _unitOfWork.Save();
-            
+
         }
 
         public async Task<bool> Delete(int id)
         {
-            var model = (await _modelRepository.GetByIdWithInclude(id, x =>x.Include(x => x.Cars)
+            var model = (await _modelRepository.GetByIdWithInclude(id, x => x.Include(x => x.Cars)
                                                                             .Include(x => x.Cars)
                                                                                 .ThenInclude(x => x.Price)
                                                                             )) as Model;
+
+            if (model.Cars.Count > 0)
+                throw new DeleteExeption("You cant delete models because this model have cars"); 
+              
+            
             if (model == null)
             {
                 return false;
@@ -55,7 +61,7 @@ namespace Bisness_Logic.Services
         public async Task<ViewModelDTO> GetModel(int id)
         {
             var model = await _modelRepository.GetByIdWithInclude(id, x => x.Include(y => y.Mark)
-                                                                                    .Include(x=>x.Cars));
+                                                                                    .Include(x => x.Cars));
             var modelDTO = _mapper.Map<ViewModelDTO>(model);
             return modelDTO;
         }
@@ -77,7 +83,7 @@ namespace Bisness_Logic.Services
 
         public async Task<IEnumerable<SelectDTO>> GetModelsForSelect(int markId)
         {
-            var models = await _modelRepository.Get(x=>x.MarkId== markId);
+            var models = await _modelRepository.Get(x => x.MarkId == markId);
 
             var modelDTOs = _mapper.Map<IEnumerable<SelectDTO>>(models);
 

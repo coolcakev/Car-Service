@@ -5,4 +5,5 @@ export const selectCarTreeNodeInfo = createSelector(selectTreeFeature, (state) =
 export const selectCarTreeNodes = createSelector(selectTreeFeature, (state) => state.carTreeNodes);
 export const selectCarTreeNodesLoading = createSelector(selectTreeFeature, (state) => state.carTreeNodesLoading);
 export const selectCurrentCarTreeNode = createSelector(selectTreeFeature, (state) => state.currentCarTreeNode);
+export const selectCurrentClickedCarTreeNode = createSelector(selectTreeFeature, (state) => state.currentClickedCarTreeNode);
 //# sourceMappingURL=tree.selectors.js.map

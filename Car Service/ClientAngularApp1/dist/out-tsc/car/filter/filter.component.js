@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 import * as CarSelectors from '../../store/selectors/car.selectors';
 import * as CarAction from '../../store/actions/car.actions';
 import { delay } from 'src/utility/delay';
+import { setCurrentClickedCarTreeNode } from 'src/store/actions/tree.actions';
 let FilterComponent = class FilterComponent {
     constructor(store) {
         this.store = store;
@@ -49,6 +50,9 @@ let FilterComponent = class FilterComponent {
         this.store.dispatch(CarAction.setCarFilteringModel({ carFiltering: { priceDate: event.value } }));
     }
     hendleGetCarsAllMarks(event) {
+        this.store.dispatch(setCurrentClickedCarTreeNode({
+            clickedTreeNode: null
+        }));
         this.store.dispatch(CarAction.setCarFilteringModel({ carFiltering: { markId: 0, modelId: 0 } }));
     }
 };

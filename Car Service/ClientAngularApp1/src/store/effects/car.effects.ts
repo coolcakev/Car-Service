@@ -103,8 +103,10 @@ export class CarEffects {
             map((action) => action.id),
             mergeMap((carId) =>
                 this.carService.deleteCar(carId).pipe(
-                    map(cars => CarAction.deleteCarSuccess()),
-                    map(cars => CarAction.getCars()),
+                    switchMap(()=>of(
+                        CarAction.deleteCarSuccess(),
+                        CarAction.getCars()
+                    )),                  
                     catchError((error: HttpErrorResponse) => of(CarAction.deleteCarFailure({ error:  error.error}))))
             ),
         );

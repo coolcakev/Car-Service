@@ -9,6 +9,7 @@ namespace Domain.Entity
     public  class Car
     {
         public int Id { get; set; }
+        
         public string Name { get; set; }
         public int MarkId { get; set; }
         public Mark Mark { get; set; }
