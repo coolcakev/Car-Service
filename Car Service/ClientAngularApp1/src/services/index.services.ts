@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class BaseService {
-    private host="https://localhost:44316"
+    private host="https://localhost:5001"
     private api=`${this.host}/api`
     protected markApi=`${this.api}/marks`
     protected modelApi=`${this.api}/models`
